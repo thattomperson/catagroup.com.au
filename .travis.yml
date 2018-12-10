@@ -1,0 +1,20 @@
+dist: xenial
+language: generic
+
+addons:
+  snaps:
+  - name: hugo 
+    channel: extended
+
+script:
+  - hugo --minify
+
+deploy:
+  provider: pages
+  local-dir: public
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  fqdn: cata.ttp.sh
+  keep-history: true
+  on:
+    branch: master
