@@ -30,11 +30,13 @@
 				margin-top: -1.75em;
 				position: relative;
 				width: calc(100% + #{3.5em});
+				background-size: cover;
 
 				img {
 					border-radius: _size(border-radius) _size(border-radius) 0 0;
 					height: auto;
 					width: auto;
+					max-width: 100%;
 					margin: auto;
 				}
 			}
