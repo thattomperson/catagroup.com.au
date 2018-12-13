@@ -11,10 +11,12 @@
                 {{ range $index, $page := .Pages }}
                 <article>
                     {{ $original := $page.Resources.GetMatch "preview.*" }}
-                    <a href="{{ $page.Permalink }}" class="image square"><img src="{{ ($original.Fit "450x250 Linear").Permalink }}" alt="{{ $page.Title }}" /></a>
-                    <h3 class="major">Sed feugiat lorem</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-                    <a href="#" class="special">Learn more</a>
+                    <a href="{{ $page.Permalink }}" class="image square" style="background-image: url(/images/pic0{{ add (mod $index 4) 4 }}.jpg)">
+                        <img src="{{ ($original.Fit "450x250 Linear").Permalink }}" alt="{{ $page.Title }}" />
+                    </a>
+                    <h3 class="major">{{ $page.Title }}</h3>
+                    <p>{{ $page.Summary }}</p>
+                    <a href="{{ $page.Permalink }}" class="special">Learn more</a>
                 </article>
                 {{ end }}
             </section>
