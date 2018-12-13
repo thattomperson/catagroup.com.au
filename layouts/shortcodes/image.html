@@ -1,5 +1,4 @@
 {{ $image := .Page.Resources.GetMatch (.Get 0) }}
-
 <span class="image {{ .Get 1 }}"><img src="{{ ($image.Resize "x200").Permalink }}"></span>
 
 
