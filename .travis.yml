@@ -10,7 +10,11 @@ deploy:
   provider: pages
   local-dir: public
   skip-cleanup: true
+  github-token: "$GITHUB_TOKEN"
   fqdn: cata.ttp.sh
   keep-history: true
   on:
     branch: master
+env:
+  global:
+    secure: CAjxDWo80F6UBeNLNeKhZYRisTUyXF+vGdsLZKKLNN20dbjdhCoAFows8aFE+4D1hQuoakcaSf/UQDQYoKK5wFlZiZtG7AEcU46e8gycq0VIkEE77c22aGLDKxWXdBQsUByWt3ED5CqYqzSBDsESJ3965hIoLawz9EUc/OvOx0Nn63F3NPbpJoAHgS/zlsqRj36Z86tjqeCBYOoDZ9bxFBIRcuDq/r8Cky0CkPSXL7I6COVd2Iba6b68V1z7JlwKc7KJzEtjAjIphE+NYVL2g5tab1t4NZZBJQ2pUtB0Q/pba4j+ATGgVqGQoahj9d74oc9UwV9i2ucINf2m6rDE8DxTLMUJyQRZTHmjvIVt6pHVkneo98oodfntqih4NkleRAgg9M81ot8inPHWPapk8jFInHV6admwQr33GhOL+8p/kyb4nqyG5e25AUb0InRjykiwY0AG3Z2bOL8xNVtbWIhaWhG3HHbVgCLLcdsHloVkwKYPXajpaJfUkN/959e4HVkbvewgi+/9zllc2wB4q2X+C1uc1FsrFWGhlNvDFrcNRrEGhC5PMG15bVG0297rzvBujPGZPqUbxEx7Jn1vEebXdqNW6Oc1//tENnNpuzKQGG0XC/W6u7yLhrG7g+LvmZwsaT+uIp7+t/I8h7ZnAJgQXXWO4qwD882CT+AjZck=
