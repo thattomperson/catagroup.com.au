@@ -15,7 +15,7 @@
                         <img src="{{ ($original.Fit "450x250 Linear").Permalink }}" alt="{{ $page.Title }}" />
                     </a>
                     <h3 class="major">{{ $page.Title }}</h3>
-                    <p>{{ $page.Summary }}</p>
+                    <p>{{ $page.Summary | plainify }}</p>
                     <a href="{{ $page.Permalink }}" class="special">Learn more</a>
                 </article>
                 {{ end }}

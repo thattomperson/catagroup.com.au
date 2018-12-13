@@ -17,7 +17,7 @@
             <a href="{{ $page.Permalink }}" class="image square"><img src="{{ ($original.Resize "600x").Permalink }}" alt="{{ $page.Title }}" /></a>
             <div class="content">
                 <h2 class="major">{{ $page.Title }}</h2>
-                <p>{{ $page.Summary }}</p>
+                <p>{{ $page.Summary | plainify }}</p>
                 <a href="{{ $page.Permalink }}" class="special">Learn more</a>
             </div>
         </div>
