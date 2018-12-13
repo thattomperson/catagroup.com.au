@@ -1,0 +1,24 @@
+{{ define "main" }}
+<section id="wrapper">
+    <header>
+        <div class="inner">
+            <h2>{{ .Title }}</h2>
+        </div>
+    </header>
+    <div class="wrapper">
+        <div class="inner">
+            <section class="features">
+                {{ range $index, $page := .Pages }}
+                <article>
+                    {{ $original := $page.Resources.GetMatch "preview.*" }}
+                    <a href="{{ $page.Permalink }}" class="image square"><img src="{{ ($original.Fit "450x250 Linear").Permalink }}" alt="{{ $page.Title }}" /></a>
+                    <h3 class="major">Sed feugiat lorem</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
+                    <a href="#" class="special">Learn more</a>
+                </article>
+                {{ end }}
+            </section>
+        </div>
+    </div>
+</section>
+{{ end }}
