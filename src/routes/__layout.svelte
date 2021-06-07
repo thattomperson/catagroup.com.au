@@ -2,9 +2,6 @@
   import '$lib/styles.css'
 	import Header from '$lib/Header/index.svelte';
 	import Footer from '$lib/Footer.svelte';
-
-  console.log('VITE_RECAPTCHA_SITE_KEY', import.meta.env, process.env)
-
 </script>
 
 <svelte:head>
