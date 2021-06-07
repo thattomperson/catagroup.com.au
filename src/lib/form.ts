@@ -7,12 +7,12 @@ export function enhance(
 		error,
 		result
 	}: {
-		pending?: (data: FormData, form: HTMLFormElement) => void;
+		pending?: (data: FormData, form: HTMLFormElement) => Promise<void>;
 		error?: (res: Response, error: Error, form: HTMLFormElement) => void;
 		result: (res: Response, form: HTMLFormElement) => void;
 	}
-) {
-	let current_token: {};
+): { destroy: () => void  } {
+	let current_token: unknown;
 
 	async function handle_submit(e: Event) {
 		const token = (current_token = {});
@@ -21,7 +21,7 @@ export function enhance(
 
 		const body = new FormData(form);
 
-		if (pending) pending(body, form);
+		if (pending) await pending(body, form);
 
 		try {
 			const res = await fetch(form.action, {
@@ -49,7 +49,6 @@ export function enhance(
 			}
 		}
 	}
-
 	form.addEventListener('submit', handle_submit);
 
 	return {
