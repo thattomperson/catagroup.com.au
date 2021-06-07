@@ -1,6 +1,5 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import type { Locals } from '$lib/types';
-import PFormData from 'form-data';
 
 import mailer from '@sendgrid/mail';
 mailer.setApiKey(import.meta.env.VITE_SENDGRID_API_KEY as string);
