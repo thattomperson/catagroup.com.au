@@ -1,21 +1,22 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import type { Locals } from '$lib/types';
+import PFormData from 'form-data';
 
 import mailer from '@sendgrid/mail';
 mailer.setApiKey(import.meta.env.VITE_SENDGRID_API_KEY as string);
 
 export const post: RequestHandler<Locals, FormData> = async (request) => {
-	const data = {
-		secret: import.meta.env.VITE_RECAPTCHA_SITE_SECRET,
-		response: request.body.get('token')
-	};
 
-	const res = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+  const data = [];
+
+	data.push(`secret=${import.meta.env.VITE_RECAPTCHA_SITE_SECRET as string}`);
+	data.push(`response=${request.body.get('token')}`);
+
+	const res = await fetch(`https://www.google.com/recaptcha/api/siteverify?${data.join('&')}`, {
 		method: request.method,
 		headers: {
 			'content-type': 'application/json'
-		},
-		body: JSON.stringify(data)
+		}
 	});
 
 	if (!res.ok) {
