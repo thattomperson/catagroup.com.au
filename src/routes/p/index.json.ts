@@ -31,7 +31,7 @@ export const get: RequestHandler<Locals> = async (request) => {
         description: `KOVA Pumps are manufactured for the marine industry and
         made to last. Leak free quality magnetic pumps can be
         used in all industries.`,
-        link: 'https://www.kovapumps.com.au/',
+        link: 'https://kovapumps-com-au.vercel.app',
       },
       {
         name: 'Master Vent',

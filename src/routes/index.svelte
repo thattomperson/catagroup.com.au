@@ -12,7 +12,7 @@
 
   // see https://kit.svelte.dev/docs#loading
   export const load: Load = async ({ fetch }) => {
-    const res = await fetch('/products.json');
+    const res = await fetch('/p.json');
 
     if (res.ok) {
       const products = await res.json();

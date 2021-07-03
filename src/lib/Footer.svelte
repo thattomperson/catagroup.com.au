@@ -28,12 +28,21 @@
           result: async (res, form) => {
             const response = await res.json();
 
-            toast.push('Success', {
-              theme: {
-                '--toastBackground': '#48BB78',
-                '--toastProgressBackground': '#2F855A'
-              }
-            });
+            if (response.success) {
+              toast.push('Success', {
+                theme: {
+                  '--toastBackground': '#48BB78',
+                  '--toastProgressBackground': '#2F855A'
+                }
+              });
+            } else {
+              toast.push('Something went wrong', {
+                theme: {
+                  '--toastBackground': '#F56565',
+                  '--toastProgressBackground': '#C53030'
+                }
+              });
+            }
 
             form.reset();
           },
