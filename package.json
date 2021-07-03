@@ -35,6 +35,7 @@
     "@fontsource/fira-mono": "^4.2.2",
     "@lukeed/uuid": "^2.0.0",
     "@sendgrid/mail": "^7.4.4",
+    "@zerodevx/svelte-toast": "^0.3.0",
     "cookie": "^0.4.1"
   }
 }

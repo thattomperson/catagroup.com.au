@@ -26,10 +26,7 @@ export const post: RequestHandler<Locals, FormData> = async (request) => {
   }
 
   const recaptcha = await res.json();
-
-  console.log(recaptcha);
-
-  if (!recaptcha.success) {
+  if (!recaptcha.success || recaptcha.action !== 'contact' || recaptcha.score < 0.5) {
     return {
       body: {
         success: false,
@@ -54,6 +51,12 @@ export const post: RequestHandler<Locals, FormData> = async (request) => {
 
   try {
     await mailer.send(msg);
+
+    return {
+      body: {
+        success: true,
+      },
+    };
   } catch (e) {
     return {
       body: {
@@ -61,10 +64,4 @@ export const post: RequestHandler<Locals, FormData> = async (request) => {
       },
     };
   }
-
-  return {
-    body: {
-      success: true,
-    },
-  };
 };

@@ -2,6 +2,7 @@
   import '$lib/styles.css';
   import Header from '$lib/Header/index.svelte';
   import Footer from '$lib/Footer.svelte';
+  import { SvelteToast } from '@zerodevx/svelte-toast'
 </script>
 
 <svelte:head>
@@ -11,8 +12,10 @@
     }`}></script>
 </svelte:head>
 
+
 <Header />
 <main>
   <slot />
 </main>
 <Footer />
+<SvelteToast/>

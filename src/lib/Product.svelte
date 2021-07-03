@@ -4,7 +4,7 @@
 
 <div class="p-4 sm:w-1/2 md:w-1/3 lg:w-1/4 sm:mb-0 mb-6">
   <div class="rounded-lg h-64 overflow-hidden">
-    <img alt="content" class="object-cover object-center h-full w-full" src={product.image} />
+    <img alt="content" class="object-contain object-center h-full w-full" src={product.image} />
   </div>
   <h2 class="text-xl font-medium title-font text-gray-900 mt-5">{product.name}</h2>
   <p class="text-base leading-relaxed mt-2">{product.description}</p>
