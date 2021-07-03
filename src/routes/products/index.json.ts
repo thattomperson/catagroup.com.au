@@ -1,10 +1,14 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import type { Locals } from '$lib/types';
 
-import gobiusImage from '../../content/gobius.png';
-import kovaImage from '../../content/kova.png';
-import masterImage from '../../content/master-vent.png';
-import arcticImage from '../../content/arctic-steel.jpg';
+// import gobiusImage from '../../../static/gobius.png';
+// import kovaImage from '../../../static/kova.png';
+// import masterImage from '../../../static/master-vent.png';
+// import arcticImage from '../../../static/arctic-steel.jpg';
+const gobiusImage = '/gobius.png';
+const kovaImage = '/kova.png';
+const masterImage = '/master-vent.png';
+const arcticImage = '/arctic-steel.jpg';
 
 // GET /todos.json
 export const get: RequestHandler<Locals> = async (request) => {
