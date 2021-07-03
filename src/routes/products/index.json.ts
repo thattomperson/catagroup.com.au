@@ -40,7 +40,7 @@ export const get: RequestHandler<Locals> = async (request) => {
         impregnated with Potassium Hydroxide (KOH). This is the same impregnated
         Activated Carbon used in commercial municipal sewage treatment plants in
         Australia, USA & Europe.`,
-        link: 'https://www.catagroup.com.au/p/master-vent',
+        link: '/p/master-vent',
       },
       {
         name: 'Arctic Steel',
