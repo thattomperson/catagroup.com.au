@@ -39,9 +39,9 @@ export const post: RequestHandler<Locals, FormData> = async (request) => {
   const message = request.body.get('message');
 
   const msg = {
-    to: import.meta.env.VITE_CONTACT_US_TO,
-    from: import.meta.env.VITE_CONTACT_US_FROM,
-    templateId: import.meta.env.VITE_SENDGRID_TEMPLATE_ID,
+    to: import.meta.env.VITE_CONTACT_US_TO as string,
+    from: import.meta.env.VITE_CONTACT_US_FROM as string,
+    templateId: import.meta.env.VITE_SENDGRID_TEMPLATE_ID as string,
     dynamicTemplateData: {
       name,
       email,
