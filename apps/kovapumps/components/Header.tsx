@@ -4,7 +4,7 @@ import { Popover, Transition } from '@headlessui/react'
 import {
   ChartBarIcon,
   CursorClickIcon,
-  DocumentReportIcon,
+  GlobeIcon,
   MenuIcon,
   RefreshIcon,
   ShieldCheckIcon,
@@ -46,13 +46,7 @@ const products = [
     description: 'All the extra bits and bobs to get you running asap.',
     href: '#',
     icon: RefreshIcon,
-  },
-  {
-    name: 'Reports',
-    description: 'Get detailed reports that will help you make more informed decisions ',
-    href: '#',
-    icon: DocumentReportIcon,
-  },
+  }
 ]
 const resources = [
   {
@@ -71,7 +65,7 @@ function classNames(...classes) {
 
 export default function Header() {
   return (
-    <Popover className="relative ">
+    <Popover className="relative max-w-2xl lg:max-w-7xl mx-auto">
       <div className="flex justify-between items-center px-4 py-6 sm:px-6 md:justify-start md:space-x-10">
         <div className="flex justify-start lg:w-0 lg:flex-1">
           <a href="#" >
@@ -141,16 +135,18 @@ export default function Header() {
                         ))}
                       </div>
                       <div className="p-5 bg-gray-50 sm:p-8">
-                        <a href="#" className="-m-3 p-3 flow-root rounded-md hover:bg-gray-100">
-                          <div className="flex items-center">
-                            <div className="text-base font-medium text-gray-900">Enterprise</div>
-                            <span className="ml-3 inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium leading-5 bg-indigo-100 text-indigo-800">
-                              New
-                            </span>
+                        <a href="#" className="-m-3 p-3 flex items-start rounded-md hover:bg-gray-100">
+                          <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white sm:h-12 sm:w-12">
+                            <GlobeIcon className="h-6 w-6" aria-hidden="true" />
                           </div>
-                          <p className="mt-1 text-sm text-gray-500">
-                            Empower your entire team with even more advanced tools.
-                          </p>
+                          <div className="flow-root ml-4">
+                            <div className="flex items-center">
+                              <div className="text-base font-medium text-gray-900">Find a store</div>
+                            </div>
+                            <p className="mt-1 text-sm text-gray-500">
+                              Find a store near you to get prices and advice.
+                            </p>
+                          </div>
                         </a>
                       </div>
                     </div>
@@ -195,7 +191,7 @@ export default function Header() {
                   leaveFrom="opacity-100 translate-y-0"
                   leaveTo="opacity-0 translate-y-1"
                 >
-                  <Popover.Panel className="absolute z-10 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-xs sm:px-0">
+                  <Popover.Panel className="absolute z-10 left-1/2 transform -translate-x-[90%] mt-3 px-2 w-screen max-w-xs sm:px-0">
                     <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                       <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                         {resources.map((resource) => (
@@ -216,8 +212,6 @@ export default function Header() {
             )}
           </Popover>
         </Popover.Group>
-        <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-        </div>
       </div>
 
       <Transition

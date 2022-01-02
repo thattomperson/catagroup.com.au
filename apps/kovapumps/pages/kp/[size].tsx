@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { StarIcon } from '@heroicons/react/solid'
 import { CurrencyDollarIcon, GlobeIcon } from '@heroicons/react/outline'
 import Image from 'next/image'
@@ -72,9 +72,28 @@ export default function Product() {
   const [selectedVoltage, setSelectedVoltage] = useState(product.voltages[0])
   const [selectedAccessory, setSelectedAccessory] = useState(product.accessories[0])
 
-  // const details = useMemo(() => {
+  const details = useMemo(() => {
+    switch (selectedVoltage.id) {
+      case '240vac':
+        return {
+          curve: <path d="m0,115.88333c173,1 285,75 288,182" stroke="currentColor" stroke-width="3px" fill="none"/>
+        }
+      case '110vac':
+        return {
+          curve: <path d="m0,130.88333c173,1 285,75 288,182" stroke="currentColor" stroke-width="3px" fill="none"/>
+        }
+      case '12vdc':
+        return {
+          curve: <path d="m-50,130.88333c173,1 285,75 288,182" stroke="currentColor" stroke-width="3px" fill="none"/>
+        }
+      case '24vdc':
+        return {
+          curve: <path d="m-50,115.88333c173,1 285,75 288,182" stroke="currentColor" stroke-width="3px" fill="none"/>
+        }
+    }
 
-  // }, [selectedVoltage])
+
+  }, [selectedVoltage])
 
   return (
     <div className="">
@@ -157,7 +176,7 @@ export default function Product() {
                     key={image.id}
                     className={classNames(
                       image.primary ? 'lg:col-span-2 lg:row-span-2' : 'hidden lg:block',
-                      'rounded-lg bg-white relative'
+                      'rounded-lg bg-white bg-opacity-5 relative'
                     )}
                   >
                     <Image
@@ -178,11 +197,11 @@ export default function Product() {
               {/* Voltage picker */}
               <div className="mt-8">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-sm font-medium text-gray-300">Size</h2>
+                  <h2 className="text-sm font-medium text-gray-300">Voltage</h2>
                 </div>
 
                 <RadioGroup value={selectedVoltage} onChange={setSelectedVoltage} className="mt-2">
-                  <RadioGroup.Label className="sr-only">Choose a size</RadioGroup.Label>
+                  <RadioGroup.Label className="sr-only">Choose a voltage</RadioGroup.Label>
                   <div className="grid grid-cols-4 gap-3">
                     {product.voltages.map((voltage) => (
                       <RadioGroup.Option
@@ -247,6 +266,28 @@ export default function Product() {
                   className="mt-4 prose prose-sm text-gray-400"
                   dangerouslySetInnerHTML={{ __html: product.description }}
                 />
+              </div>
+
+              {/* Pump performance cures  */}
+              <div className="mt-8 border-t border-gray-200 pt-8">
+                <h2 className="text-sm  font-medium text-gray-100">Pump Curves - {selectedVoltage.name}</h2>
+
+                <div className="mt-4 text-gray-400">
+                  <svg viewBox="0 0 400 300"xmlns="http://www.w3.org/2000/svg">
+                      <line y2="300" x2="0" y1="0" x1="0" stroke="currentColor" fill="none"/>
+                      <line y2="300" x2="400" y1="300" x1="0" stroke="currentColor" fill="none"/>
+                      <line y2="300" x2="50" y1="300" x1="50" stroke="currentColor" fill="none"/>
+                      <line y2="300" x2="50" y1="0" x1="50" stroke="currentColor" fill="none"/>
+                      <line y2="300" x2="100" y1="0" x1="100" stroke="currentColor" fill="none"/>
+                      <line y2="300" x2="150" y1="0" x1="150" stroke="currentColor" fill="none"/>
+                      <line y2="300" x2="200" y1="0" x1="200" stroke="currentColor" fill="none"/>
+                      <line y2="300" x2="250" y1="0" x1="250" stroke="currentColor" fill="none"/>
+                      <line y2="300" x2="300" y1="0" x1="300" stroke="currentColor" fill="none"/>
+                      <line y2="300" x2="350" y1="0" x1="350" stroke="currentColor" fill="none"/>
+                      <line y2="300" x2="400" y1="0" x1="400" stroke="currentColor" fill="none"/>
+                      {details.curve}
+                  </svg>
+                </div>
               </div>
 
               <div className="mt-8 border-t border-gray-200 pt-8">
