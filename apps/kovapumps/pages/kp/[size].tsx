@@ -76,19 +76,19 @@ export default function Product() {
     switch (selectedVoltage.id) {
       case '240vac':
         return {
-          curve: <path d="m0,115.88333c173,1 285,75 288,182" stroke="currentColor" stroke-width="3px" fill="none"/>
+          curve: <path d="m0,115.88333c173,1 285,75 288,182" stroke="currentColor" strokeWidth="3px" fill="none"/>
         }
       case '110vac':
         return {
-          curve: <path d="m0,130.88333c173,1 285,75 288,182" stroke="currentColor" stroke-width="3px" fill="none"/>
+          curve: <path d="m0,130.88333c173,1 285,75 288,182" stroke="currentColor" strokeWidth="3px" fill="none"/>
         }
       case '12vdc':
         return {
-          curve: <path d="m-50,130.88333c173,1 285,75 288,182" stroke="currentColor" stroke-width="3px" fill="none"/>
+          curve: <path d="m-50,130.88333c173,1 285,75 288,182" stroke="currentColor" strokeWidth="3px" fill="none"/>
         }
       case '24vdc':
         return {
-          curve: <path d="m-50,115.88333c173,1 285,75 288,182" stroke="currentColor" stroke-width="3px" fill="none"/>
+          curve: <path d="m-50,115.88333c173,1 285,75 288,182" stroke="currentColor" strokeWidth="3px" fill="none"/>
         }
     }
 
