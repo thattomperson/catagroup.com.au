@@ -1,4 +1,4 @@
-const withTM = require("next-transpile-modules")(["@catagroup/ui"]);
+const withTM = require("next-transpile-modules")(["ui"]);
 const path = require("path")
 
 module.exports = withTM({
