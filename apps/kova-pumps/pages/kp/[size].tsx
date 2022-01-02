@@ -208,7 +208,6 @@ export default function Product() {
                 </RadioGroup>
               </div>
 
-
               {/* Accessory picker */}
               <div className="mt-8">
                 <div className="flex items-center justify-between">
