@@ -8,7 +8,6 @@ import Link from 'next/link'
 
 const product = {
   name: 'KP2400',
-  price: '$35',
   rating: 3.9,
   reviewCount: 512,
   href: '#',
@@ -48,20 +47,14 @@ const product = {
     { id: 'mount&strainer', name: 'Vibration Mount & Strainer', inStock: true }
   ],
   description: `
-    <p>The Basic tee is an honest new take on a classic. The tee uses super soft, pre-shrunk cotton for true comfort and a dependable fit. They are hand cut and sewn locally, with a special dye technique that gives each tee it's own look.</p>
-    <p>Looking to stock your closet? The Basic tee also comes in a 3-pack or 5-pack at a bundle discount.</p>
+    <p>The KP2400 is a workhorse that can handle pretty much any task you can throw at it. Available in 240, 110 VAC and 24, 12 VDC this pump can handle anything</p>
+    <p>Pumping 2400 liters a minute in such a small footprint in a feat in itself</p>
   `,
-  details: [
-    'Only the best materials',
-    'Ethically and locally made',
-    'Pre-washed and pre-shrunk',
-    'Machine wash cold with similar colors',
-  ],
 }
 
 const policies = [
-  { name: 'International delivery', icon: GlobeIcon, description: 'Get your order in 2 years' },
-  { name: 'Loyalty rewards', icon: CurrencyDollarIcon, description: "Don't look at other tees" },
+  { name: '2 Year Warranty', icon: GlobeIcon, description: 'Send your pump back to us and we will replace it' },
+  { name: 'Rated for continuous run', icon: CurrencyDollarIcon, description: "Rated for 50,000 hours of continuous run time" },
 ]
 
 function classNames(...classes) {
@@ -132,7 +125,6 @@ export default function Product() {
             <div className="lg:col-start-8 lg:col-span-5">
               <div className="flex justify-between">
                 <h1 className="text-xl font-medium text-gray-100">{product.name}</h1>
-                <p className="text-xl font-medium text-gray-100">{product.price}</p>
               </div>
               {/* Reviews */}
               <div className="mt-4">
@@ -194,6 +186,37 @@ export default function Product() {
             </div>
 
             <div className="mt-8 lg:col-span-5">
+
+              {/* Product details */}
+              <div className="mt-10">
+                <h2 className="text-sm font-medium text-gray-100">Description</h2>
+
+                <div
+                  className="mt-4 prose prose-sm text-gray-400"
+                  dangerouslySetInnerHTML={{ __html: product.description }}
+                />
+              </div>
+
+              {/* Policies */}
+              <section aria-labelledby="policies-heading" className="mt-10">
+                <h2 id="policies-heading" className="sr-only">
+                  Our Policies
+                </h2>
+
+                <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                  {policies.map((policy) => (
+                    <div key={policy.name} className="bg-neutral-900 border border-neutral-800 rounded-lg p-6 text-center">
+                      <dt>
+                        <policy.icon className="mx-auto h-6 w-6 flex-shrink-0 text-neutral-200" aria-hidden="true" />
+                        <span className="mt-4 text-sm font-medium text-neutral-100">{policy.name}</span>
+                      </dt>
+                      <dd className="mt-1 text-sm text-neutral-300">{policy.description}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </section>
+
+
               {/* Voltage picker */}
               <div className="mt-8">
                 <div className="flex items-center justify-between">
@@ -224,6 +247,28 @@ export default function Product() {
                     ))}
                   </div>
                 </RadioGroup>
+              </div>
+
+              {/* Pump performance cures  */}
+              <div className="mt-8">
+                <h2 className="text-sm  font-medium text-gray-100">Pump Curves - {selectedVoltage.name}</h2>
+
+                <div className="mt-4 text-gray-400">
+                  <svg viewBox="0 0 400 300"xmlns="http://www.w3.org/2000/svg">
+                      <line y2="300" x2="0" y1="0" x1="0" stroke="currentColor" fill="none"/>
+                      <line y2="300" x2="400" y1="300" x1="0" stroke="currentColor" fill="none"/>
+                      <line y2="300" x2="50" y1="300" x1="50" stroke="currentColor" fill="none"/>
+                      <line y2="300" x2="50" y1="0" x1="50" stroke="currentColor" fill="none"/>
+                      <line y2="300" x2="100" y1="0" x1="100" stroke="currentColor" fill="none"/>
+                      <line y2="300" x2="150" y1="0" x1="150" stroke="currentColor" fill="none"/>
+                      <line y2="300" x2="200" y1="0" x1="200" stroke="currentColor" fill="none"/>
+                      <line y2="300" x2="250" y1="0" x1="250" stroke="currentColor" fill="none"/>
+                      <line y2="300" x2="300" y1="0" x1="300" stroke="currentColor" fill="none"/>
+                      <line y2="300" x2="350" y1="0" x1="350" stroke="currentColor" fill="none"/>
+                      <line y2="300" x2="400" y1="0" x1="400" stroke="currentColor" fill="none"/>
+                      {details.curve}
+                  </svg>
+                </div>
               </div>
 
               {/* Accessory picker */}
@@ -257,69 +302,6 @@ export default function Product() {
                   </div>
                 </RadioGroup>
               </div>
-
-              {/* Product details */}
-              <div className="mt-10">
-                <h2 className="text-sm font-medium text-gray-100">Description</h2>
-
-                <div
-                  className="mt-4 prose prose-sm text-gray-400"
-                  dangerouslySetInnerHTML={{ __html: product.description }}
-                />
-              </div>
-
-              {/* Pump performance cures  */}
-              <div className="mt-8 border-t border-gray-200 pt-8">
-                <h2 className="text-sm  font-medium text-gray-100">Pump Curves - {selectedVoltage.name}</h2>
-
-                <div className="mt-4 text-gray-400">
-                  <svg viewBox="0 0 400 300"xmlns="http://www.w3.org/2000/svg">
-                      <line y2="300" x2="0" y1="0" x1="0" stroke="currentColor" fill="none"/>
-                      <line y2="300" x2="400" y1="300" x1="0" stroke="currentColor" fill="none"/>
-                      <line y2="300" x2="50" y1="300" x1="50" stroke="currentColor" fill="none"/>
-                      <line y2="300" x2="50" y1="0" x1="50" stroke="currentColor" fill="none"/>
-                      <line y2="300" x2="100" y1="0" x1="100" stroke="currentColor" fill="none"/>
-                      <line y2="300" x2="150" y1="0" x1="150" stroke="currentColor" fill="none"/>
-                      <line y2="300" x2="200" y1="0" x1="200" stroke="currentColor" fill="none"/>
-                      <line y2="300" x2="250" y1="0" x1="250" stroke="currentColor" fill="none"/>
-                      <line y2="300" x2="300" y1="0" x1="300" stroke="currentColor" fill="none"/>
-                      <line y2="300" x2="350" y1="0" x1="350" stroke="currentColor" fill="none"/>
-                      <line y2="300" x2="400" y1="0" x1="400" stroke="currentColor" fill="none"/>
-                      {details.curve}
-                  </svg>
-                </div>
-              </div>
-
-              <div className="mt-8 border-t border-gray-200 pt-8">
-                <h2 className="text-sm font-medium text-gray-100">Fabric &amp; Care</h2>
-
-                <div className="mt-4 prose prose-sm text-gray-400">
-                  <ul role="list">
-                    {product.details.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              {/* Policies */}
-              <section aria-labelledby="policies-heading" className="mt-10">
-                <h2 id="policies-heading" className="sr-only">
-                  Our Policies
-                </h2>
-
-                <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-                  {policies.map((policy) => (
-                    <div key={policy.name} className="bg-gray-900 border border-gray-800 rounded-lg p-6 text-center">
-                      <dt>
-                        <policy.icon className="mx-auto h-6 w-6 flex-shrink-0 text-gray-200" aria-hidden="true" />
-                        <span className="mt-4 text-sm font-medium text-gray-100">{policy.name}</span>
-                      </dt>
-                      <dd className="mt-1 text-sm text-gray-300">{policy.description}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </section>
             </div>
           </div>
         </div>
