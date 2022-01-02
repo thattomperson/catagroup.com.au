@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  /* Smooth scrolling on the entire site */
+  @apply scroll-smooth;
+
+  @apply bg-black;
+}
