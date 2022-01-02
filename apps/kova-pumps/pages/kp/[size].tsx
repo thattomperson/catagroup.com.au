@@ -1,9 +1,8 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { StarIcon } from '@heroicons/react/solid'
 import { CurrencyDollarIcon, GlobeIcon } from '@heroicons/react/outline'
 import Image from 'next/image'
 
-import KP2400 from '../../static/images/kova2400.png'
 import { RadioGroup } from '@headlessui/react'
 import Link from 'next/link'
 
@@ -73,9 +72,9 @@ export default function Product() {
   const [selectedVoltage, setSelectedVoltage] = useState(product.voltages[0])
   const [selectedAccessory, setSelectedAccessory] = useState(product.accessories[0])
 
-  const details = useMemo(() => {
+  // const details = useMemo(() => {
 
-  }, [selectedVoltage])
+  // }, [selectedVoltage])
 
   return (
     <div className="">
@@ -155,13 +154,13 @@ export default function Product() {
               <div className="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-3 lg:gap-8">
                 {product.images.map((image) => (
                   <span
+                    key={image.id}
                     className={classNames(
                       image.primary ? 'lg:col-span-2 lg:row-span-2' : 'hidden lg:block',
                       'rounded-lg bg-white relative'
                     )}
                   >
                     <Image
-                      key={image.id}
                       src={image.imageSrc}
                       alt={image.imageAlt}
                       width="600px"
