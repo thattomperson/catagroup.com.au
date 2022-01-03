@@ -69,19 +69,19 @@ export default function Product() {
     switch (selectedVoltage.id) {
       case '240vac':
         return {
-          curve: <path d="m0,115.88333c173,1 285,75 288,182" stroke="currentColor" strokeWidth="3px" fill="none"/>
+          curve: <path d="m0,115.88333c173,1 285,75 288,182" stroke="currentColor" strokeWidth="3px" fill="none" />
         }
       case '110vac':
         return {
-          curve: <path d="m0,130.88333c173,1 285,75 288,182" stroke="currentColor" strokeWidth="3px" fill="none"/>
+          curve: <path d="m0,130.88333c173,1 285,75 288,182" stroke="currentColor" strokeWidth="3px" fill="none" />
         }
       case '12vdc':
         return {
-          curve: <path d="m-50,130.88333c173,1 285,75 288,182" stroke="currentColor" strokeWidth="3px" fill="none"/>
+          curve: <path d="m-50,130.88333c173,1 285,75 288,182" stroke="currentColor" strokeWidth="3px" fill="none" />
         }
       case '24vdc':
         return {
-          curve: <path d="m-50,115.88333c173,1 285,75 288,182" stroke="currentColor" strokeWidth="3px" fill="none"/>
+          curve: <path d="m-50,115.88333c173,1 285,75 288,182" stroke="currentColor" strokeWidth="3px" fill="none" />
         }
     }
 
@@ -125,36 +125,6 @@ export default function Product() {
             <div className="lg:col-start-8 lg:col-span-5">
               <div className="flex justify-between">
                 <h1 className="text-xl font-medium text-gray-100">{product.name}</h1>
-              </div>
-              {/* Reviews */}
-              <div className="mt-4">
-                <h2 className="sr-only">Reviews</h2>
-                <div className="flex items-center">
-                  <p className="text-sm text-gray-300">
-                    {product.rating}
-                    <span className="sr-only"> out of 5 stars</span>
-                  </p>
-                  <div className="ml-1 flex items-center">
-                    {[0, 1, 2, 3, 4].map((rating) => (
-                      <StarIcon
-                        key={rating}
-                        className={classNames(
-                          product.rating > rating ? 'text-yellow-400' : 'text-gray-200',
-                          'h-5 w-5 flex-shrink-0'
-                        )}
-                        aria-hidden="true"
-                      />
-                    ))}
-                  </div>
-                  <div aria-hidden="true" className="ml-4 text-sm text-gray-300">
-                    ·
-                  </div>
-                  <div className="ml-4 flex">
-                    <a href="#" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                      See all {product.reviewCount} reviews
-                    </a>
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -254,19 +224,19 @@ export default function Product() {
                 <h2 className="text-sm  font-medium text-gray-100">Pump Curves - {selectedVoltage.name}</h2>
 
                 <div className="mt-4 text-gray-400">
-                  <svg viewBox="0 0 400 300"xmlns="http://www.w3.org/2000/svg">
-                      <line y2="300" x2="0" y1="0" x1="0" stroke="currentColor" fill="none"/>
-                      <line y2="300" x2="400" y1="300" x1="0" stroke="currentColor" fill="none"/>
-                      <line y2="300" x2="50" y1="300" x1="50" stroke="currentColor" fill="none"/>
-                      <line y2="300" x2="50" y1="0" x1="50" stroke="currentColor" fill="none"/>
-                      <line y2="300" x2="100" y1="0" x1="100" stroke="currentColor" fill="none"/>
-                      <line y2="300" x2="150" y1="0" x1="150" stroke="currentColor" fill="none"/>
-                      <line y2="300" x2="200" y1="0" x1="200" stroke="currentColor" fill="none"/>
-                      <line y2="300" x2="250" y1="0" x1="250" stroke="currentColor" fill="none"/>
-                      <line y2="300" x2="300" y1="0" x1="300" stroke="currentColor" fill="none"/>
-                      <line y2="300" x2="350" y1="0" x1="350" stroke="currentColor" fill="none"/>
-                      <line y2="300" x2="400" y1="0" x1="400" stroke="currentColor" fill="none"/>
-                      {details.curve}
+                  <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <line y2="300" x2="0" y1="0" x1="0" stroke="currentColor" fill="none" />
+                    <line y2="300" x2="400" y1="300" x1="0" stroke="currentColor" fill="none" />
+                    <line y2="300" x2="50" y1="300" x1="50" stroke="currentColor" fill="none" />
+                    <line y2="300" x2="50" y1="0" x1="50" stroke="currentColor" fill="none" />
+                    <line y2="300" x2="100" y1="0" x1="100" stroke="currentColor" fill="none" />
+                    <line y2="300" x2="150" y1="0" x1="150" stroke="currentColor" fill="none" />
+                    <line y2="300" x2="200" y1="0" x1="200" stroke="currentColor" fill="none" />
+                    <line y2="300" x2="250" y1="0" x1="250" stroke="currentColor" fill="none" />
+                    <line y2="300" x2="300" y1="0" x1="300" stroke="currentColor" fill="none" />
+                    <line y2="300" x2="350" y1="0" x1="350" stroke="currentColor" fill="none" />
+                    <line y2="300" x2="400" y1="0" x1="400" stroke="currentColor" fill="none" />
+                    {details.curve}
                   </svg>
                 </div>
               </div>
@@ -308,4 +278,67 @@ export default function Product() {
       </div>
     </div>
   )
+}
+
+
+
+
+import { gql } from 'graphql-request';
+import { GraphQLClient } from 'graphql-request';
+
+
+const graphcms = new GraphQLClient(
+  'https://api-ap-southeast-2.graphcms.com/v2/ckxxxt3qb1lft01web6320pnu/master'
+);
+
+const LIST = gql`
+query MyQuery {
+  products {
+    name
+    slug
+    categories {
+      ... on Category {
+        name
+        slug
+      }
+    }
+  }
+}
+
+`
+
+const SINGLE = gql`
+query CategoryPageQuery($slug: String!) {
+  category(where: {slug: $slug}) {
+    id
+    name
+    slug
+  }
+}
+`
+
+// export async function getStaticProps({ params }) {
+//   const { product } = await graphcms.request(
+//     SINGLE,
+//     { slug: params.product }
+//   )
+
+//   return {
+//     props: {
+//       product
+//     }
+//   }
+// }
+
+export async function getStaticPaths() {
+  const { products } = await graphcms.request(LIST)
+
+  return {
+    paths: products.map(product => {
+      return product.categories.map(category => {
+        return { params: { category: category.slug, product: product.slug } };
+      })
+    }).flat(),
+    fallback: false
+  }
 }
