@@ -280,19 +280,11 @@ export default function Product() {
   )
 }
 
-
-
-
 import { gql } from 'graphql-request';
-import { GraphQLClient } from 'graphql-request';
+import api from '../../lib/api'
 
-
-const graphcms = new GraphQLClient(
-  'https://api-ap-southeast-2.graphcms.com/v2/ckxxxt3qb1lft01web6320pnu/master'
-);
-
-const LIST = gql`
-query MyQuery {
+gql`
+query ProductPageItems {
   products {
     name
     slug
@@ -307,31 +299,32 @@ query MyQuery {
 
 `
 
-const SINGLE = gql`
-query CategoryPageQuery($slug: String!) {
-  category(where: {slug: $slug}) {
-    id
+gql`
+query ProductPageItem($product: String!, $category: String!) {
+  product(where: {slug: $product}) {
+    name
+    slug
+  }
+  category(where: {slug: $category}) {
     name
     slug
   }
 }
 `
 
-// export async function getStaticProps({ params }) {
-//   const { product } = await graphcms.request(
-//     SINGLE,
-//     { slug: params.product }
-//   )
+export async function getStaticProps({ params }) {
+  const { product, category } = await api.ProductPageItem({ product: params.product, category: params.category })
 
-//   return {
-//     props: {
-//       product
-//     }
-//   }
-// }
+  return {
+    props: {
+      product,
+      category
+    }
+  }
+}
 
 export async function getStaticPaths() {
-  const { products } = await graphcms.request(LIST)
+  const { products } = await api.ProductPageItems();
 
   return {
     paths: products.map(product => {

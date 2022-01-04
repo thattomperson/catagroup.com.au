@@ -6,5 +6,5 @@ html {
   /* Smooth scrolling on the entire site */
   @apply scroll-smooth;
 
-  @apply bg-black;
+  @apply bg-neutral-900;
 }

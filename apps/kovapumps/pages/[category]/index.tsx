@@ -1,39 +1,31 @@
 import { Button } from "ui";
 
 
-export default function Web() {
+export default function Categories({ categories, category }) {
   return (
-    <div>
-      <h1>Web</h1>
-      <Button />
-    </div>
+    <Layout categories={categories}>
+      <div>
+        <h1>{category.name}</h1>
+
+        {category.products.map((product) => {
+          return <>
+            <h2>{product.name}</h2>
+          </>
+        })}
+      </div>
+    </Layout>
   );
 }
 
 
 import { gql } from 'graphql-request';
-import { GraphQLClient } from 'graphql-request';
+import api from "../../lib/api";
+import Layout from "../../components/Layout";
 
 
-const graphcms = new GraphQLClient(
-  'https://api-ap-southeast-2.graphcms.com/v2/ckxxxt3qb1lft01web6320pnu/master'
-);
-
-const LIST = gql`
-
-  {
-    categories {
-      id
-      name
-      slug
-    }
-  }
-`
-
-const SINGLE = gql`
-query CategoryPageQuery($slug: String!) {
-  category(where: {slug: $slug}) {
-    id
+gql`
+query CategoryPageItems {
+  categories {
     name
     slug
   }
@@ -41,22 +33,36 @@ query CategoryPageQuery($slug: String!) {
 
 `
 
+gql`
+query CategoryPageItem($slug: String!) {
+  category(where: {slug: $slug}) {
+    name
+    slug
+    products {
+      ... on Product {
+        name
+        slug
+      }
+    }
+  }
+  categories {
+    ...HeaderCategoryFields
+  }
+}
+`
 export async function getStaticProps({ params }) {
-  const { category } = await graphcms.request(
-    SINGLE,
-    { slug: params.category }
-  )
+  const { category, categories } = await api.CategoryPageItem({ slug: params.category })
 
   return {
     props: {
-      category
+      category,
+      categories
     }
   }
 }
 
 export async function getStaticPaths() {
-  const { categories } = await graphcms.request(LIST)
-
+  const { categories } = await api.CategoryPageItems()
 
   return {
     paths: categories.map(category => ({ params: { category: category.slug }})),

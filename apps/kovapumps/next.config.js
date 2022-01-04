@@ -3,6 +3,9 @@ const path = require("path")
 
 module.exports = withTM({
   reactStrictMode: true,
+  images: {
+    domains: ['media.graphcms.com'],
+  },
   webpack: (config, options) => {
     if (options.isServer) {
       config.externals = ['react', ...config.externals];
