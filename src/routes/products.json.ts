@@ -31,7 +31,7 @@ export const get: RequestHandler<Locals> = async (request) => {
         description: `KOVA Pumps are manufactured for the marine industry and
         made to last. Leak free quality magnetic pumps can be
         used in all industries.`,
-        link: 'https://kovapumps-com-au.vercel.app',
+        // link: 'https://kovapumps-com-au.vercel.app',
       },
       {
         name: 'Master Vent',
@@ -40,7 +40,7 @@ export const get: RequestHandler<Locals> = async (request) => {
         impregnated with Potassium Hydroxide (KOH). This is the same impregnated
         Activated Carbon used in commercial municipal sewage treatment plants in
         Australia, USA & Europe.`,
-        link: '/master-vent',
+        link: 'https://mastervent.com.au/',
       },
       {
         name: 'Arctic Steel',
