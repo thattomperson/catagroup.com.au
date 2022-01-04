@@ -9,11 +9,6 @@ import impregnated from '../assets/impregnated.png'
 import basic from '../assets/basic.png'
 import crossSection from '../assets/cross-section.png'
 
-
-
-
-
-
 export default function Web() {
   return (
     <>
@@ -90,11 +85,11 @@ export default function Web() {
               Master Vent is an industrial grade OxPure Activated Carbon filter that is
               impregnated with Potassium Hydroxide (KOH). This is the same impregnated
               Activated Carbon used in commercial municipal sewage treatment plants in
-              Australia, USA & Europe.
+              Australia, USA &amp; Europe.
             </p>
             <p>
               Australian made and designed for easy installation by having a multiple staged
-              tail for different size hoses 16mm-5/8" 19mm-3/4" 25mm-1" 38mm-1 1/2".
+              tail for different size hoses 16mm-5/8&quot; 19mm-3/4&quot; 25mm-1&quot; 38mm-1 1/2&quot;.
             </p>
             <p>
               Master Vent comes with a mount kit, but for easy change over it will also fit
@@ -108,7 +103,7 @@ export default function Web() {
             <figure>
               <Image src={masterVent} width={735} height={masterVent.height / (masterVent.width / 735)} alt="Master Vent" layout='responsive' />
             </figure>
-            <h2>Don't be fooled, there is a difference..</h2>
+            <h2>Don&apos;t be fooled, there is a difference..</h2>
             <CardList>
               <Card image={impregnated}>
                 Master Vent uses a quality industrial grade OxPure 4B-KOH Activated Carbon
