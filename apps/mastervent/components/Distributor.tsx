@@ -45,7 +45,9 @@ export default function Distributor({ distributor }: { distributor: DistributorL
           </div> : null}
           {distributor.website ? <div className="-ml-px min-w-[50%] flex-1 flex">
             <a
-              href={`tel:${distributor.website}`}
+              href={distributor.website}
+              target="_blank"
+              rel="noreferrer"
               className="relative flex-col flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500"
             >
               <span className='flex-1 inline-flex items-center justify-center'>
