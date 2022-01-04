@@ -9,7 +9,11 @@ import impregnated from '../assets/impregnated.png'
 import basic from '../assets/basic.png'
 import crossSection from '../assets/cross-section.png'
 
-export default function Web() {
+import api, { DistributorListQuery } from '../lib/api'
+import DistributorList from '../components/DistributorList';
+import Footer from '../components/Footer';
+
+export default function Home({ areas }: { areas: DistributorListQuery['areas'] }) {
   return (
     <>
       <header className="bg-gradient-to-b from-[#16488D] to-[#2858A8]">
@@ -17,7 +21,6 @@ export default function Web() {
           <Image src={logo} width={688} height={logo.height / (logo.width / 688)} alt="Master Vent" layout='responsive' />
         </div>
       </header>
-
 
       <div className="relative py-16 bg-white overflow-hidden">
         <div className="hidden lg:block lg:absolute lg:inset-y-0 lg:h-full lg:w-full">
@@ -125,7 +128,22 @@ export default function Web() {
             </p>
           </div>
         </div>
-    </div>
+      </div>
+      <div className='container max-w-2xl lg:max-w-7xl mx-auto'>
+        <DistributorList areas={areas} />
+      </div>
+
+      <Footer />
     </>
   );
+}
+
+export async function getStaticProps() {
+  const { areas } = await api.DistributorList();
+
+  return {
+    props: {
+      areas
+    }
+  }
 }
