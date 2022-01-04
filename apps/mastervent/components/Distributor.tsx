@@ -3,7 +3,7 @@ import { MailIcon, PhoneIcon, GlobeAltIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import { DistributorListQuery } from '../lib/api'
 
-export default function Distributor({ distributor }: { distributor: DistributorListQuery['distributors'][0] }) {
+export default function Distributor({ distributor }: { distributor: DistributorListQuery['areas'][0]['distributors'][0] }) {
   return (
     <li
       key={distributor.email}
