@@ -40,7 +40,7 @@ query CategoryPageItem($slug: String!) {
 `
 
 gql`
-query CategoryPageItems($slug: String!) {
+query CategoryPageItems {
   categories {
     ...HeaderCategoryFields
   }

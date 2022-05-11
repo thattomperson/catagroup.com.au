@@ -24,16 +24,16 @@ export default function Product({ product, category }) {
         </div>
         <div className="flex-1 p-4 space-y-2 flex flex-col">
           <h3 className="text-sm font-medium text-gray-900">
-            <a href={product.href}>
+            {/* <a href={product.href}>
               <span aria-hidden="true" className="absolute inset-0" />
               {product.name}
-            </a>
+            </a> */}
           </h3>
-          <p className="text-sm text-gray-500">{product.description}</p>
+          {/* <p className="text-sm text-gray-500">{product.description}</p>
           <div className="flex-1 flex flex-col justify-end">
             <p className="text-sm italic text-gray-500">{product.options}</p>
             <p className="text-base font-medium text-gray-900">{product.price}</p>
-          </div>
+          </div> */}
         </div>
       </a>
     </Link>

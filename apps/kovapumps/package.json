@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "run-p dev:*",
+    "dev": "npm run dev:next",
     "dev:next": "next dev --port 3001",
     "dev:codegen": "graphql-codegen -r dotenv/config --config codegen.yml --watch",
     "prebuild": "npm run build:codegen",

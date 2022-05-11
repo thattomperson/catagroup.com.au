@@ -41,6 +41,7 @@ export type Asset = Node & {
   createdAt: Scalars['DateTime'];
   /** User that created this document */
   createdBy?: Maybe<User>;
+  curveVoltage: Array<Voltage>;
   /** Get the document in other stages */
   documentInStages: Array<Asset>;
   /** The file name */
@@ -90,6 +91,19 @@ export type AssetCreatedAtArgs = {
 /** Asset system model */
 export type AssetCreatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
+};
+
+
+/** Asset system model */
+export type AssetCurveVoltageArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<VoltageOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<VoltageWhereInput>;
 };
 
 
@@ -204,6 +218,7 @@ export type AssetCreateInput = {
   /** altText input for default locale (en) */
   altText?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  curveVoltage?: InputMaybe<VoltageCreateManyInlineInput>;
   fileName: Scalars['String'];
   handle: Scalars['String'];
   height?: InputMaybe<Scalars['Float']>;
@@ -289,6 +304,9 @@ export type AssetManyWhereInput = {
   /** All values that are not contained in given list. */
   createdAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
   createdBy?: InputMaybe<UserWhereInput>;
+  curveVoltage_every?: InputMaybe<VoltageWhereInput>;
+  curveVoltage_none?: InputMaybe<VoltageWhereInput>;
+  curveVoltage_some?: InputMaybe<VoltageWhereInput>;
   id?: InputMaybe<Scalars['ID']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']>;
@@ -387,6 +405,7 @@ export type AssetTransformationInput = {
 export type AssetUpdateInput = {
   /** altText input for default locale (en) */
   altText?: InputMaybe<Scalars['String']>;
+  curveVoltage?: InputMaybe<VoltageUpdateManyInlineInput>;
   fileName?: InputMaybe<Scalars['String']>;
   handle?: InputMaybe<Scalars['String']>;
   height?: InputMaybe<Scalars['Float']>;
@@ -566,6 +585,9 @@ export type AssetWhereInput = {
   /** All values that are not contained in given list. */
   createdAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
   createdBy?: InputMaybe<UserWhereInput>;
+  curveVoltage_every?: InputMaybe<VoltageWhereInput>;
+  curveVoltage_none?: InputMaybe<VoltageWhereInput>;
+  curveVoltage_some?: InputMaybe<VoltageWhereInput>;
   fileName?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   fileName_contains?: InputMaybe<Scalars['String']>;
@@ -4388,12 +4410,16 @@ export type VersionWhereInput = {
 
 export type Voltage = Node & {
   __typename?: 'Voltage';
+  amps: Scalars['Float'];
   /** The time the document was created */
   createdAt: Scalars['DateTime'];
   /** User that created this document */
   createdBy?: Maybe<User>;
+  /** Image of the pump curve */
+  curve?: Maybe<Asset>;
   /** Get the document in other stages */
   documentInStages: Array<Voltage>;
+  hertz: Scalars['Int'];
   /** List of Voltage versions */
   history: Array<Version>;
   /** The unique identifier */
@@ -4410,10 +4436,16 @@ export type Voltage = Node & {
   /** User that last updated this document */
   updatedBy?: Maybe<User>;
   voltage: Scalars['String'];
+  watts: Scalars['Int'];
 };
 
 
 export type VoltageCreatedByArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type VoltageCurveArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -4470,10 +4502,14 @@ export type VoltageConnection = {
 };
 
 export type VoltageCreateInput = {
+  amps: Scalars['Float'];
   ckyqtvn201a9c01z4amgp3lyu?: InputMaybe<ProductCreateManyInlineInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  curve?: InputMaybe<AssetCreateOneInlineInput>;
+  hertz: Scalars['Int'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   voltage: Scalars['String'];
+  watts: Scalars['Int'];
 };
 
 export type VoltageCreateManyInlineInput = {
@@ -4509,6 +4545,21 @@ export type VoltageManyWhereInput = {
   OR?: InputMaybe<Array<VoltageWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']>;
+  amps?: InputMaybe<Scalars['Float']>;
+  /** All values greater than the given value. */
+  amps_gt?: InputMaybe<Scalars['Float']>;
+  /** All values greater than or equal the given value. */
+  amps_gte?: InputMaybe<Scalars['Float']>;
+  /** All values that are contained in given list. */
+  amps_in?: InputMaybe<Array<Scalars['Float']>>;
+  /** All values less than the given value. */
+  amps_lt?: InputMaybe<Scalars['Float']>;
+  /** All values less than or equal the given value. */
+  amps_lte?: InputMaybe<Scalars['Float']>;
+  /** All values that are not equal to given value. */
+  amps_not?: InputMaybe<Scalars['Float']>;
+  /** All values that are not contained in given list. */
+  amps_not_in?: InputMaybe<Array<Scalars['Float']>>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -4525,6 +4576,22 @@ export type VoltageManyWhereInput = {
   /** All values that are not contained in given list. */
   createdAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
   createdBy?: InputMaybe<UserWhereInput>;
+  curve?: InputMaybe<AssetWhereInput>;
+  hertz?: InputMaybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  hertz_gt?: InputMaybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  hertz_gte?: InputMaybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  hertz_in?: InputMaybe<Array<Scalars['Int']>>;
+  /** All values less than the given value. */
+  hertz_lt?: InputMaybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  hertz_lte?: InputMaybe<Scalars['Int']>;
+  /** All values that are not equal to given value. */
+  hertz_not?: InputMaybe<Scalars['Int']>;
+  /** All values that are not contained in given list. */
+  hertz_not_in?: InputMaybe<Array<Scalars['Int']>>;
   id?: InputMaybe<Scalars['ID']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']>;
@@ -4598,11 +4665,30 @@ export type VoltageManyWhereInput = {
   voltage_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   voltage_starts_with?: InputMaybe<Scalars['String']>;
+  watts?: InputMaybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  watts_gt?: InputMaybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  watts_gte?: InputMaybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  watts_in?: InputMaybe<Array<Scalars['Int']>>;
+  /** All values less than the given value. */
+  watts_lt?: InputMaybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  watts_lte?: InputMaybe<Scalars['Int']>;
+  /** All values that are not equal to given value. */
+  watts_not?: InputMaybe<Scalars['Int']>;
+  /** All values that are not contained in given list. */
+  watts_not_in?: InputMaybe<Array<Scalars['Int']>>;
 };
 
 export enum VoltageOrderByInput {
+  AmpsAsc = 'amps_ASC',
+  AmpsDesc = 'amps_DESC',
   CreatedAtAsc = 'createdAt_ASC',
   CreatedAtDesc = 'createdAt_DESC',
+  HertzAsc = 'hertz_ASC',
+  HertzDesc = 'hertz_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
@@ -4610,12 +4696,18 @@ export enum VoltageOrderByInput {
   UpdatedAtAsc = 'updatedAt_ASC',
   UpdatedAtDesc = 'updatedAt_DESC',
   VoltageAsc = 'voltage_ASC',
-  VoltageDesc = 'voltage_DESC'
+  VoltageDesc = 'voltage_DESC',
+  WattsAsc = 'watts_ASC',
+  WattsDesc = 'watts_DESC'
 }
 
 export type VoltageUpdateInput = {
+  amps?: InputMaybe<Scalars['Float']>;
   ckyqtvn201a9c01z4amgp3lyu?: InputMaybe<ProductUpdateManyInlineInput>;
+  curve?: InputMaybe<AssetUpdateOneInlineInput>;
+  hertz?: InputMaybe<Scalars['Int']>;
   voltage?: InputMaybe<Scalars['String']>;
+  watts?: InputMaybe<Scalars['Int']>;
 };
 
 export type VoltageUpdateManyInlineInput = {
@@ -4636,7 +4728,10 @@ export type VoltageUpdateManyInlineInput = {
 };
 
 export type VoltageUpdateManyInput = {
+  amps?: InputMaybe<Scalars['Float']>;
+  hertz?: InputMaybe<Scalars['Int']>;
   voltage?: InputMaybe<Scalars['String']>;
+  watts?: InputMaybe<Scalars['Int']>;
 };
 
 export type VoltageUpdateManyWithNestedWhereInput = {
@@ -4692,6 +4787,21 @@ export type VoltageWhereInput = {
   OR?: InputMaybe<Array<VoltageWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']>;
+  amps?: InputMaybe<Scalars['Float']>;
+  /** All values greater than the given value. */
+  amps_gt?: InputMaybe<Scalars['Float']>;
+  /** All values greater than or equal the given value. */
+  amps_gte?: InputMaybe<Scalars['Float']>;
+  /** All values that are contained in given list. */
+  amps_in?: InputMaybe<Array<Scalars['Float']>>;
+  /** All values less than the given value. */
+  amps_lt?: InputMaybe<Scalars['Float']>;
+  /** All values less than or equal the given value. */
+  amps_lte?: InputMaybe<Scalars['Float']>;
+  /** All values that are not equal to given value. */
+  amps_not?: InputMaybe<Scalars['Float']>;
+  /** All values that are not contained in given list. */
+  amps_not_in?: InputMaybe<Array<Scalars['Float']>>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -4708,6 +4818,22 @@ export type VoltageWhereInput = {
   /** All values that are not contained in given list. */
   createdAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
   createdBy?: InputMaybe<UserWhereInput>;
+  curve?: InputMaybe<AssetWhereInput>;
+  hertz?: InputMaybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  hertz_gt?: InputMaybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  hertz_gte?: InputMaybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  hertz_in?: InputMaybe<Array<Scalars['Int']>>;
+  /** All values less than the given value. */
+  hertz_lt?: InputMaybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  hertz_lte?: InputMaybe<Scalars['Int']>;
+  /** All values that are not equal to given value. */
+  hertz_not?: InputMaybe<Scalars['Int']>;
+  /** All values that are not contained in given list. */
+  hertz_not_in?: InputMaybe<Array<Scalars['Int']>>;
   id?: InputMaybe<Scalars['ID']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']>;
@@ -4781,6 +4907,21 @@ export type VoltageWhereInput = {
   voltage_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   voltage_starts_with?: InputMaybe<Scalars['String']>;
+  watts?: InputMaybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  watts_gt?: InputMaybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  watts_gte?: InputMaybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  watts_in?: InputMaybe<Array<Scalars['Int']>>;
+  /** All values less than the given value. */
+  watts_lt?: InputMaybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  watts_lte?: InputMaybe<Scalars['Int']>;
+  /** All values that are not equal to given value. */
+  watts_not?: InputMaybe<Scalars['Int']>;
+  /** All values that are not contained in given list. */
+  watts_not_in?: InputMaybe<Array<Scalars['Int']>>;
 };
 
 /** References Voltage record uniquely */
@@ -4875,7 +5016,7 @@ export type ProductPageItemQueryVariables = Exact<{
 }>;
 
 
-export type ProductPageItemQuery = { __typename?: 'Query', product?: { __typename?: 'Product', id: string, name: string, slug?: string | null | undefined, voltages: Array<{ __typename?: 'Voltage', voltage: string }>, images: Array<{ __typename?: 'Asset', id: string, url: string, altText?: string | null | undefined, width?: number | null | undefined, height?: number | null | undefined }> } | null | undefined, category?: { __typename?: 'Category', name: string, slug: string } | null | undefined, categories: Array<{ __typename?: 'Category', name: string, slug: string, description?: string | null | undefined }> };
+export type ProductPageItemQuery = { __typename?: 'Query', product?: { __typename?: 'Product', id: string, name: string, slug?: string | null | undefined, voltages: Array<{ __typename?: 'Voltage', id: string, voltage: string, amps: number, watts: number, hertz: number, curve?: { __typename?: 'Asset', id: string, url: string, altText?: string | null | undefined, width?: number | null | undefined, height?: number | null | undefined } | null | undefined }>, images: Array<{ __typename?: 'Asset', id: string, url: string, altText?: string | null | undefined, width?: number | null | undefined, height?: number | null | undefined }> } | null | undefined, category?: { __typename?: 'Category', name: string, slug: string } | null | undefined, categories: Array<{ __typename?: 'Category', name: string, slug: string, description?: string | null | undefined }> };
 
 export type ProductPageItemsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -4889,9 +5030,7 @@ export type CategoryPageItemQueryVariables = Exact<{
 
 export type CategoryPageItemQuery = { __typename?: 'Query', category?: { __typename?: 'Category', name: string, slug: string, products: Array<{ __typename?: 'Product', name: string, slug?: string | null | undefined, images: Array<{ __typename?: 'Asset', id: string, url: string, altText?: string | null | undefined, width?: number | null | undefined, height?: number | null | undefined }> }> } | null | undefined, categories: Array<{ __typename?: 'Category', name: string, slug: string, description?: string | null | undefined }> };
 
-export type CategoryPageItemsQueryVariables = Exact<{
-  slug: Scalars['String'];
-}>;
+export type CategoryPageItemsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type CategoryPageItemsQuery = { __typename?: 'Query', categories: Array<{ __typename?: 'Category', name: string, slug: string, description?: string | null | undefined }> };
@@ -4915,7 +5054,18 @@ export const ProductPageItemDocument = gql`
     name
     slug
     voltages {
+      id
       voltage
+      amps
+      watts
+      hertz
+      curve {
+        id
+        url
+        altText
+        width
+        height
+      }
     }
     images {
       id
@@ -4970,7 +5120,7 @@ export const CategoryPageItemDocument = gql`
 }
     ${HeaderCategoryFieldsFragmentDoc}`;
 export const CategoryPageItemsDocument = gql`
-    query CategoryPageItems($slug: String!) {
+    query CategoryPageItems {
   categories {
     ...HeaderCategoryFields
   }
@@ -5007,7 +5157,7 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     CategoryPageItem(variables: CategoryPageItemQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CategoryPageItemQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<CategoryPageItemQuery>(CategoryPageItemDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CategoryPageItem');
     },
-    CategoryPageItems(variables: CategoryPageItemsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CategoryPageItemsQuery> {
+    CategoryPageItems(variables?: CategoryPageItemsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CategoryPageItemsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<CategoryPageItemsQuery>(CategoryPageItemsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CategoryPageItems');
     },
     HomeCategoryList(variables?: HomeCategoryListQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<HomeCategoryListQuery> {
