@@ -1,0 +1,34 @@
+{
+  "pipeline": {
+    "build": {
+      "dependsOn": [
+        "graphql:codegen",
+        "^build"
+      ],
+      "outputs": [
+        "dist/**",
+        ".next/**"
+      ]
+    },
+    "lint": {
+      "outputs": []
+    },
+    "dev": {
+      "cache": false
+    },
+    "graphql:codegen": {
+      "outputs": [
+        "lib/api/generated/**"
+      ]
+    },
+    "graphql:codegen:watch": {
+      "outputs": [
+        "lib/api/generated/**"
+      ],
+      "cache": false
+    },
+    "env:pull": {
+      "cache": false
+    }
+  }
+}

@@ -17,40 +17,6 @@
     "prettier": "^2.5.1",
     "turbo": "latest"
   },
-  "turbo": {
-    "pipeline": {
-      "build": {
-        "dependsOn": [
-          "graphql:codegen",
-          "^build"
-        ],
-        "outputs": [
-          "dist/**",
-          ".next/**"
-        ]
-      },
-      "lint": {
-        "outputs": []
-      },
-      "dev": {
-        "cache": false
-      },
-      "graphql:codegen": {
-        "outputs": [
-          "lib/api/generated/**"
-        ]
-      },
-      "graphql:codegen:watch": {
-        "outputs": [
-          "lib/api/generated/**"
-        ],
-        "cache": false
-      },
-      "env:pull": {
-        "cache": false
-      }
-    }
-  },
   "engines": {
     "npm": ">=7.0.0",
     "node": ">=14.0.0"
