@@ -1,37 +1,18 @@
-import { Button } from "ui";
+import { gql } from 'graphql-request';
+import api from "../../lib/api";
+import Layout from "../../components/Layout";
+import Products from "../../components/Products";
+import { CategoryPageItemQuery } from '../../lib/api/generated/graphql';
 
-
-export default function Categories({ categories, category }) {
+export default function CategoryPageItem({ categories, category }: CategoryPageItemQuery) {
   return (
     <Layout categories={categories}>
       <div>
-        <h1>{category.name}</h1>
-
-        {category.products.map((product) => {
-          return <>
-            <h2>{product.name}</h2>
-          </>
-        })}
+        <Products category={category} products={category.products} />
       </div>
     </Layout>
   );
 }
-
-
-import { gql } from 'graphql-request';
-import api from "../../lib/api";
-import Layout from "../../components/Layout";
-
-
-gql`
-query CategoryPageItems {
-  categories {
-    name
-    slug
-  }
-}
-
-`
 
 gql`
 query CategoryPageItem($slug: String!) {
@@ -42,6 +23,13 @@ query CategoryPageItem($slug: String!) {
       ... on Product {
         name
         slug
+        images(first: 1) {
+          id
+          url
+          altText
+          width
+          height
+        }
       }
     }
   }
@@ -50,6 +38,15 @@ query CategoryPageItem($slug: String!) {
   }
 }
 `
+
+gql`
+query CategoryPageItems($slug: String!) {
+  categories {
+    ...HeaderCategoryFields
+  }
+}
+`
+
 export async function getStaticProps({ params }) {
   const { category, categories } = await api.CategoryPageItem({ slug: params.category })
 

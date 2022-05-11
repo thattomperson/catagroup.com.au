@@ -6,14 +6,13 @@
     "apps/*",
     "packages/*"
   ],
+  "packageManager": "npm",
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "env:pull": "turbo run env:pull --parallel",
-    "graphql:codegen": "turbo run graphql:codegen --parallel",
-    "graphql:codegen:watch": "turbo run graphql:codegen:watch --parallel --no-cache"
+    "env:pull": "turbo run env:pull --parallel"
   },
   "devDependencies": {
     "prettier": "^2.5.1",

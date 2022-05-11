@@ -2,55 +2,10 @@ import { useMemo, useState } from 'react'
 import { StarIcon } from '@heroicons/react/solid'
 import { CurrencyDollarIcon, GlobeIcon } from '@heroicons/react/outline'
 import Image from 'next/image'
+import { ProductPageItemQuery } from '../../lib/api/generated/graphql'
 
 import { RadioGroup } from '@headlessui/react'
 import Link from 'next/link'
-
-const product = {
-  name: 'KP2400',
-  rating: 3.9,
-  reviewCount: 512,
-  href: '#',
-  breadcrumbs: [
-    { id: 1, name: 'KOVA Pumps', href: '/' },
-    { id: 2, name: 'Centrifugal Pumps', href: '/kp' },
-  ],
-  images: [
-    {
-      id: 1,
-      imageSrc: '/images/kova2400/1.png',
-      imageAlt: "Back of women's Basic Tee in black.",
-      primary: true,
-    },
-    {
-      id: 2,
-      imageSrc: '/images/kova2400/2.png',
-      imageAlt: "Back of women's Basic Tee in black.",
-      primary: false,
-    },
-    {
-      id: 3,
-      imageSrc: '/images/kova2400/3.png',
-      imageAlt: "Back of women's Basic Tee in black.",
-      primary: false,
-    },
-  ],
-  voltages: [
-    { id: '240vac', name: '240vac', inStock: true },
-    { id: '110vac', name: '110vac', inStock: true },
-    { id: '12vdc', name: '12vdc', inStock: true },
-    { id: '24vdc', name: '24vdc', inStock: true },
-  ],
-  accessories: [
-    { id: 'none', name: 'None', inStock: true },
-    { id: 'mount', name: 'Vibration Mount', inStock: true },
-    { id: 'mount&strainer', name: 'Vibration Mount & Strainer', inStock: true }
-  ],
-  description: `
-    <p>The KP2400 is a workhorse that can handle pretty much any task you can throw at it. Available in 240, 110 VAC and 24, 12 VDC this pump can handle anything</p>
-    <p>Pumping 2400 liters a minute in such a small footprint in a feat in itself</p>
-  `,
-}
 
 const policies = [
   { name: '2 Year Warranty', icon: GlobeIcon, description: 'Send your pump back to us and we will replace it' },
@@ -61,9 +16,12 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Product() {
+
+export default function ProductPageItem({ product, category, categories }: ProductPageItemQuery) {
+  console.log(product);
+
   const [selectedVoltage, setSelectedVoltage] = useState(product.voltages[0])
-  const [selectedAccessory, setSelectedAccessory] = useState(product.accessories[0])
+  // const [selectedAccessory, setSelectedAccessory] = useState(product.accessories[0])
 
   const details = useMemo(() => {
     switch (selectedVoltage.id) {
@@ -89,11 +47,12 @@ export default function Product() {
   }, [selectedVoltage])
 
   return (
+    <Layout categories={categories}>
     <div className="">
       <div className="pt-6 pb-16 sm:pb-24">
         <nav aria-label="Breadcrumb" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ol role="list" className="flex items-center space-x-4">
-            {product.breadcrumbs.map((breadcrumb) => (
+              {/* {product.breadcrumbs.map((breadcrumb) => (
               <li key={breadcrumb.id}>
                 <div className="flex items-center">
                   <Link href={breadcrumb.href}>
@@ -111,7 +70,7 @@ export default function Product() {
                   </svg>
                 </div>
               </li>
-            ))}
+            ))} */}
             <li className="text-sm">
               <a href={product.href} aria-current="page" className="font-medium text-gray-300 hover:text-gray-400">
                 {product.name}
@@ -198,11 +157,11 @@ export default function Product() {
                   <div className="grid grid-cols-4 gap-3">
                     {product.voltages.map((voltage) => (
                       <RadioGroup.Option
-                        key={voltage.name}
+                        key={voltage.voltage}
                         value={voltage}
                         className={({ active, checked }) =>
                           classNames(
-                            voltage.inStock ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed',
+                            true ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed',
                             active ? 'ring-2 ring-offset-2 ring-indigo-500' : '',
                             checked
                               ? 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700'
@@ -210,9 +169,9 @@ export default function Product() {
                             'border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1'
                           )
                         }
-                        disabled={!voltage.inStock}
+                        disabled={false}
                       >
-                        <RadioGroup.Label as="p" className="text-center">{voltage.name}</RadioGroup.Label>
+                        <RadioGroup.Label as="p" className="text-center">{voltage.voltage}</RadioGroup.Label>
                       </RadioGroup.Option>
                     ))}
                   </div>
@@ -246,7 +205,7 @@ export default function Product() {
                 <div className="flex items-center justify-between">
                   <h2 className="text-sm font-medium text-gray-300">Accessories</h2>
                 </div>
-
+                  {/*
                 <RadioGroup value={selectedAccessory} onChange={setSelectedAccessory} className="mt-2">
                   <RadioGroup.Label className="sr-only">Choose a size</RadioGroup.Label>
                   <div className="grid grid-cols-3 gap-3">
@@ -270,55 +229,68 @@ export default function Product() {
                       </RadioGroup.Option>
                     ))}
                   </div>
-                </RadioGroup>
+                </RadioGroup> */}
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    </Layout>
   )
 }
 
 import { gql } from 'graphql-request';
 import api from '../../lib/api'
-
-gql`
-query ProductPageItems {
-  products {
-    name
-    slug
-    categories {
-      ... on Category {
-        name
-        slug
-      }
-    }
-  }
-}
-
-`
+import Layout from '../../components/Layout'
 
 gql`
 query ProductPageItem($product: String!, $category: String!) {
   product(where: {slug: $product}) {
+    id
     name
     slug
+    voltages {
+      voltage
+    }
+    images {
+      id
+      url
+      altText
+      width
+      height
+    }
   }
   category(where: {slug: $category}) {
     name
     slug
   }
+  categories {
+    ...HeaderCategoryFields
+  }
+}
+`
+
+gql`
+query ProductPageItems {
+  products {
+    id
+    slug
+    categories {
+      slug
+    }
+  }
 }
 `
 
 export async function getStaticProps({ params }) {
-  const { product, category } = await api.ProductPageItem({ product: params.product, category: params.category })
+  const { product, category, categories } = await api.ProductPageItem({ product: params.product, category: params.category })
 
   return {
     props: {
       product,
-      category
+      category,
+      categories
     }
   }
 }
@@ -326,7 +298,7 @@ export async function getStaticProps({ params }) {
 export async function getStaticPaths() {
   const { products } = await api.ProductPageItems();
 
-  return {
+  const t = {
     paths: products.map(product => {
       return product.categories.map(category => {
         return { params: { category: category.slug, product: product.slug } };
@@ -334,4 +306,6 @@ export async function getStaticPaths() {
     }).flat(),
     fallback: false
   }
+  console.log(t.paths)
+  return t
 }

@@ -1,7 +1,13 @@
 import '../styles/globals.css'
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+import { useFathom } from 'fathom';
+
+function App({ Component, pageProps }) {
+  useFathom(process.env.NEXT_PUBLIC_FATHOM_SITE_ID, {
+    includedDomains: [process.env.NEXT_PUBLIC_VERCEL_URL],
+  });
+
+  return <Component {...pageProps} />;
 }
 
-export default MyApp
+export default App;

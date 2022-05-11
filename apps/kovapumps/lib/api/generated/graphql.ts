@@ -808,6 +808,7 @@ export type CategoryProductsArgs = {
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<ProductOrderByInput>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<ProductWhereInput>;
 };
@@ -1422,6 +1423,8 @@ export type Mutation = {
   createProduct?: Maybe<Product>;
   /** Create one scheduledRelease */
   createScheduledRelease?: Maybe<ScheduledRelease>;
+  /** Create one voltage */
+  createVoltage?: Maybe<Voltage>;
   /** Delete one asset from _all_ existing stages. Returns deleted document. */
   deleteAsset?: Maybe<Asset>;
   /** Delete one category from _all_ existing stages. Returns deleted document. */
@@ -1447,12 +1450,21 @@ export type Mutation = {
   deleteManyProducts: BatchPayload;
   /** Delete many Product documents, return deleted documents */
   deleteManyProductsConnection: ProductConnection;
+  /**
+   * Delete many Voltage documents
+   * @deprecated Please use the new paginated many mutation (deleteManyVoltagesConnection)
+   */
+  deleteManyVoltages: BatchPayload;
+  /** Delete many Voltage documents, return deleted documents */
+  deleteManyVoltagesConnection: VoltageConnection;
   /** Delete one product from _all_ existing stages. Returns deleted document. */
   deleteProduct?: Maybe<Product>;
   /** Delete and return scheduled operation */
   deleteScheduledOperation?: Maybe<ScheduledOperation>;
   /** Delete one scheduledRelease from _all_ existing stages. Returns deleted document. */
   deleteScheduledRelease?: Maybe<ScheduledRelease>;
+  /** Delete one voltage from _all_ existing stages. Returns deleted document. */
+  deleteVoltage?: Maybe<Voltage>;
   /** Publish one asset */
   publishAsset?: Maybe<Asset>;
   /** Publish one category */
@@ -1478,20 +1490,33 @@ export type Mutation = {
   publishManyProducts: BatchPayload;
   /** Publish many Product documents */
   publishManyProductsConnection: ProductConnection;
+  /**
+   * Publish many Voltage documents
+   * @deprecated Please use the new paginated many mutation (publishManyVoltagesConnection)
+   */
+  publishManyVoltages: BatchPayload;
+  /** Publish many Voltage documents */
+  publishManyVoltagesConnection: VoltageConnection;
   /** Publish one product */
   publishProduct?: Maybe<Product>;
+  /** Publish one voltage */
+  publishVoltage?: Maybe<Voltage>;
   /** Schedule to publish one asset */
   schedulePublishAsset?: Maybe<Asset>;
   /** Schedule to publish one category */
   schedulePublishCategory?: Maybe<Category>;
   /** Schedule to publish one product */
   schedulePublishProduct?: Maybe<Product>;
+  /** Schedule to publish one voltage */
+  schedulePublishVoltage?: Maybe<Voltage>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishAsset?: Maybe<Asset>;
   /** Unpublish one category from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishCategory?: Maybe<Category>;
   /** Unpublish one product from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishProduct?: Maybe<Product>;
+  /** Unpublish one voltage from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  scheduleUnpublishVoltage?: Maybe<Voltage>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishAsset?: Maybe<Asset>;
   /** Unpublish one category from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -1517,8 +1542,17 @@ export type Mutation = {
   unpublishManyProducts: BatchPayload;
   /** Find many Product documents that match criteria in specified stage and unpublish from target stages */
   unpublishManyProductsConnection: ProductConnection;
+  /**
+   * Unpublish many Voltage documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyVoltagesConnection)
+   */
+  unpublishManyVoltages: BatchPayload;
+  /** Find many Voltage documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManyVoltagesConnection: VoltageConnection;
   /** Unpublish one product from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishProduct?: Maybe<Product>;
+  /** Unpublish one voltage from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishVoltage?: Maybe<Voltage>;
   /** Update one asset */
   updateAsset?: Maybe<Asset>;
   /** Update one category */
@@ -1544,16 +1578,27 @@ export type Mutation = {
   updateManyProducts: BatchPayload;
   /** Update many Product documents */
   updateManyProductsConnection: ProductConnection;
+  /**
+   * Update many voltages
+   * @deprecated Please use the new paginated many mutation (updateManyVoltagesConnection)
+   */
+  updateManyVoltages: BatchPayload;
+  /** Update many Voltage documents */
+  updateManyVoltagesConnection: VoltageConnection;
   /** Update one product */
   updateProduct?: Maybe<Product>;
   /** Update one scheduledRelease */
   updateScheduledRelease?: Maybe<ScheduledRelease>;
+  /** Update one voltage */
+  updateVoltage?: Maybe<Voltage>;
   /** Upsert one asset */
   upsertAsset?: Maybe<Asset>;
   /** Upsert one category */
   upsertCategory?: Maybe<Category>;
   /** Upsert one product */
   upsertProduct?: Maybe<Product>;
+  /** Upsert one voltage */
+  upsertVoltage?: Maybe<Voltage>;
 };
 
 
@@ -1574,6 +1619,11 @@ export type MutationCreateProductArgs = {
 
 export type MutationCreateScheduledReleaseArgs = {
   data: ScheduledReleaseCreateInput;
+};
+
+
+export type MutationCreateVoltageArgs = {
+  data: VoltageCreateInput;
 };
 
 
@@ -1632,6 +1682,21 @@ export type MutationDeleteManyProductsConnectionArgs = {
 };
 
 
+export type MutationDeleteManyVoltagesArgs = {
+  where?: InputMaybe<VoltageManyWhereInput>;
+};
+
+
+export type MutationDeleteManyVoltagesConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<VoltageManyWhereInput>;
+};
+
+
 export type MutationDeleteProductArgs = {
   where: ProductWhereUniqueInput;
 };
@@ -1644,6 +1709,11 @@ export type MutationDeleteScheduledOperationArgs = {
 
 export type MutationDeleteScheduledReleaseArgs = {
   where: ScheduledReleaseWhereUniqueInput;
+};
+
+
+export type MutationDeleteVoltageArgs = {
+  where: VoltageWhereUniqueInput;
 };
 
 
@@ -1722,9 +1792,33 @@ export type MutationPublishManyProductsConnectionArgs = {
 };
 
 
+export type MutationPublishManyVoltagesArgs = {
+  to?: Array<Stage>;
+  where?: InputMaybe<VoltageManyWhereInput>;
+};
+
+
+export type MutationPublishManyVoltagesConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  to?: Array<Stage>;
+  where?: InputMaybe<VoltageManyWhereInput>;
+};
+
+
 export type MutationPublishProductArgs = {
   to?: Array<Stage>;
   where: ProductWhereUniqueInput;
+};
+
+
+export type MutationPublishVoltageArgs = {
+  to?: Array<Stage>;
+  where: VoltageWhereUniqueInput;
 };
 
 
@@ -1755,6 +1849,14 @@ export type MutationSchedulePublishProductArgs = {
 };
 
 
+export type MutationSchedulePublishVoltageArgs = {
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  to?: Array<Stage>;
+  where: VoltageWhereUniqueInput;
+};
+
+
 export type MutationScheduleUnpublishAssetArgs = {
   from?: Array<Stage>;
   locales?: InputMaybe<Array<Locale>>;
@@ -1778,6 +1880,14 @@ export type MutationScheduleUnpublishProductArgs = {
   releaseAt?: InputMaybe<Scalars['DateTime']>;
   releaseId?: InputMaybe<Scalars['String']>;
   where: ProductWhereUniqueInput;
+};
+
+
+export type MutationScheduleUnpublishVoltageArgs = {
+  from?: Array<Stage>;
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  where: VoltageWhereUniqueInput;
 };
 
 
@@ -1853,9 +1963,33 @@ export type MutationUnpublishManyProductsConnectionArgs = {
 };
 
 
+export type MutationUnpublishManyVoltagesArgs = {
+  from?: Array<Stage>;
+  where?: InputMaybe<VoltageManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyVoltagesConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: Array<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: InputMaybe<Stage>;
+  where?: InputMaybe<VoltageManyWhereInput>;
+};
+
+
 export type MutationUnpublishProductArgs = {
   from?: Array<Stage>;
   where: ProductWhereUniqueInput;
+};
+
+
+export type MutationUnpublishVoltageArgs = {
+  from?: Array<Stage>;
+  where: VoltageWhereUniqueInput;
 };
 
 
@@ -1922,6 +2056,23 @@ export type MutationUpdateManyProductsConnectionArgs = {
 };
 
 
+export type MutationUpdateManyVoltagesArgs = {
+  data: VoltageUpdateManyInput;
+  where?: InputMaybe<VoltageManyWhereInput>;
+};
+
+
+export type MutationUpdateManyVoltagesConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  data: VoltageUpdateManyInput;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<VoltageManyWhereInput>;
+};
+
+
 export type MutationUpdateProductArgs = {
   data: ProductUpdateInput;
   where: ProductWhereUniqueInput;
@@ -1931,6 +2082,12 @@ export type MutationUpdateProductArgs = {
 export type MutationUpdateScheduledReleaseArgs = {
   data: ScheduledReleaseUpdateInput;
   where: ScheduledReleaseWhereUniqueInput;
+};
+
+
+export type MutationUpdateVoltageArgs = {
+  data: VoltageUpdateInput;
+  where: VoltageWhereUniqueInput;
 };
 
 
@@ -1949,6 +2106,12 @@ export type MutationUpsertCategoryArgs = {
 export type MutationUpsertProductArgs = {
   upsert: ProductUpsertInput;
   where: ProductWhereUniqueInput;
+};
+
+
+export type MutationUpsertVoltageArgs = {
+  upsert: VoltageUpsertInput;
+  where: VoltageWhereUniqueInput;
 };
 
 /** An object with an ID */
@@ -1976,7 +2139,7 @@ export type PageInfo = {
 
 export type Product = Node & {
   __typename?: 'Product';
-  categories: Array<ProductCategories>;
+  categories: Array<Category>;
   /** The time the document was created */
   createdAt: Scalars['DateTime'];
   /** User that created this document */
@@ -2002,6 +2165,7 @@ export type Product = Node & {
   updatedAt: Scalars['DateTime'];
   /** User that last updated this document */
   updatedBy?: Maybe<User>;
+  voltages: Array<Voltage>;
 };
 
 
@@ -2011,7 +2175,9 @@ export type ProductCategoriesArgs = {
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<CategoryOrderByInput>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<CategoryWhereInput>;
 };
 
 
@@ -2066,84 +2232,16 @@ export type ProductUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
-export type ProductCategories = Category;
 
-export type ProductCategoriesConnectInput = {
-  Category?: InputMaybe<CategoryConnectInput>;
-};
-
-export type ProductCategoriesCreateInput = {
-  Category?: InputMaybe<CategoryCreateInput>;
-};
-
-export type ProductCategoriesCreateManyInlineInput = {
-  /** Connect multiple existing ProductCategories documents */
-  connect?: InputMaybe<Array<ProductCategoriesWhereUniqueInput>>;
-  /** Create and connect multiple existing ProductCategories documents */
-  create?: InputMaybe<Array<ProductCategoriesCreateInput>>;
-};
-
-export type ProductCategoriesCreateOneInlineInput = {
-  /** Connect one existing ProductCategories document */
-  connect?: InputMaybe<ProductCategoriesWhereUniqueInput>;
-  /** Create and connect one ProductCategories document */
-  create?: InputMaybe<ProductCategoriesCreateInput>;
-};
-
-export type ProductCategoriesUpdateInput = {
-  Category?: InputMaybe<CategoryUpdateInput>;
-};
-
-export type ProductCategoriesUpdateManyInlineInput = {
-  /** Connect multiple existing ProductCategories documents */
-  connect?: InputMaybe<Array<ProductCategoriesConnectInput>>;
-  /** Create and connect multiple ProductCategories documents */
-  create?: InputMaybe<Array<ProductCategoriesCreateInput>>;
-  /** Delete multiple ProductCategories documents */
-  delete?: InputMaybe<Array<ProductCategoriesWhereUniqueInput>>;
-  /** Disconnect multiple ProductCategories documents */
-  disconnect?: InputMaybe<Array<ProductCategoriesWhereUniqueInput>>;
-  /** Override currently-connected documents with multiple existing ProductCategories documents */
-  set?: InputMaybe<Array<ProductCategoriesWhereUniqueInput>>;
-  /** Update multiple ProductCategories documents */
-  update?: InputMaybe<Array<ProductCategoriesUpdateWithNestedWhereUniqueInput>>;
-  /** Upsert multiple ProductCategories documents */
-  upsert?: InputMaybe<Array<ProductCategoriesUpsertWithNestedWhereUniqueInput>>;
-};
-
-export type ProductCategoriesUpdateManyWithNestedWhereInput = {
-  Category?: InputMaybe<CategoryUpdateManyWithNestedWhereInput>;
-};
-
-export type ProductCategoriesUpdateOneInlineInput = {
-  /** Connect existing ProductCategories document */
-  connect?: InputMaybe<ProductCategoriesWhereUniqueInput>;
-  /** Create and connect one ProductCategories document */
-  create?: InputMaybe<ProductCategoriesCreateInput>;
-  /** Delete currently connected ProductCategories document */
-  delete?: InputMaybe<Scalars['Boolean']>;
-  /** Disconnect currently connected ProductCategories document */
-  disconnect?: InputMaybe<Scalars['Boolean']>;
-  /** Update single ProductCategories document */
-  update?: InputMaybe<ProductCategoriesUpdateWithNestedWhereUniqueInput>;
-  /** Upsert single ProductCategories document */
-  upsert?: InputMaybe<ProductCategoriesUpsertWithNestedWhereUniqueInput>;
-};
-
-export type ProductCategoriesUpdateWithNestedWhereUniqueInput = {
-  Category?: InputMaybe<CategoryUpdateWithNestedWhereUniqueInput>;
-};
-
-export type ProductCategoriesUpsertWithNestedWhereUniqueInput = {
-  Category?: InputMaybe<CategoryUpsertWithNestedWhereUniqueInput>;
-};
-
-export type ProductCategoriesWhereInput = {
-  Category?: InputMaybe<CategoryWhereInput>;
-};
-
-export type ProductCategoriesWhereUniqueInput = {
-  Category?: InputMaybe<CategoryWhereUniqueInput>;
+export type ProductVoltagesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<VoltageOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<VoltageWhereInput>;
 };
 
 export type ProductConnectInput = {
@@ -2164,12 +2262,13 @@ export type ProductConnection = {
 };
 
 export type ProductCreateInput = {
-  categories?: InputMaybe<ProductCategoriesCreateManyInlineInput>;
+  categories?: InputMaybe<CategoryCreateManyInlineInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   images?: InputMaybe<AssetCreateManyInlineInput>;
   name: Scalars['String'];
   slug?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
+  voltages?: InputMaybe<VoltageCreateManyInlineInput>;
 };
 
 export type ProductCreateManyInlineInput = {
@@ -2205,6 +2304,9 @@ export type ProductManyWhereInput = {
   OR?: InputMaybe<Array<ProductWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']>;
+  categories_every?: InputMaybe<CategoryWhereInput>;
+  categories_none?: InputMaybe<CategoryWhereInput>;
+  categories_some?: InputMaybe<CategoryWhereInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -2316,6 +2418,9 @@ export type ProductManyWhereInput = {
   /** All values that are not contained in given list. */
   updatedAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
   updatedBy?: InputMaybe<UserWhereInput>;
+  voltages_every?: InputMaybe<VoltageWhereInput>;
+  voltages_none?: InputMaybe<VoltageWhereInput>;
+  voltages_some?: InputMaybe<VoltageWhereInput>;
 };
 
 export enum ProductOrderByInput {
@@ -2334,10 +2439,11 @@ export enum ProductOrderByInput {
 }
 
 export type ProductUpdateInput = {
-  categories?: InputMaybe<ProductCategoriesUpdateManyInlineInput>;
+  categories?: InputMaybe<CategoryUpdateManyInlineInput>;
   images?: InputMaybe<AssetUpdateManyInlineInput>;
   name?: InputMaybe<Scalars['String']>;
   slug?: InputMaybe<Scalars['String']>;
+  voltages?: InputMaybe<VoltageUpdateManyInlineInput>;
 };
 
 export type ProductUpdateManyInlineInput = {
@@ -2415,6 +2521,9 @@ export type ProductWhereInput = {
   OR?: InputMaybe<Array<ProductWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']>;
+  categories_every?: InputMaybe<CategoryWhereInput>;
+  categories_none?: InputMaybe<CategoryWhereInput>;
+  categories_some?: InputMaybe<CategoryWhereInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -2526,6 +2635,9 @@ export type ProductWhereInput = {
   /** All values that are not contained in given list. */
   updatedAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
   updatedBy?: InputMaybe<UserWhereInput>;
+  voltages_every?: InputMaybe<VoltageWhereInput>;
+  voltages_none?: InputMaybe<VoltageWhereInput>;
+  voltages_some?: InputMaybe<VoltageWhereInput>;
 };
 
 /** References Product record uniquely */
@@ -2588,6 +2700,14 @@ export type Query = {
   users: Array<User>;
   /** Retrieve multiple users using the Relay connection interface */
   usersConnection: UserConnection;
+  /** Retrieve a single voltage */
+  voltage?: Maybe<Voltage>;
+  /** Retrieve document version */
+  voltageVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple voltages */
+  voltages: Array<Voltage>;
+  /** Retrieve multiple voltages using the Relay connection interface */
+  voltagesConnection: VoltageConnection;
 };
 
 
@@ -2810,6 +2930,44 @@ export type QueryUsersConnectionArgs = {
   where?: InputMaybe<UserWhereInput>;
 };
 
+
+export type QueryVoltageArgs = {
+  locales?: Array<Locale>;
+  stage?: Stage;
+  where: VoltageWhereUniqueInput;
+};
+
+
+export type QueryVoltageVersionArgs = {
+  where: VersionWhereInput;
+};
+
+
+export type QueryVoltagesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<VoltageOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<VoltageWhereInput>;
+};
+
+
+export type QueryVoltagesConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<VoltageOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<VoltageWhereInput>;
+};
+
 /** Representing a RGBA color value: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#rgb()_and_rgba() */
 export type Rgba = {
   __typename?: 'RGBA';
@@ -2917,7 +3075,7 @@ export type ScheduledOperationUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
-export type ScheduledOperationAffectedDocument = Asset | Category | Product;
+export type ScheduledOperationAffectedDocument = Asset | Category | Product | Voltage;
 
 export type ScheduledOperationConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
@@ -4228,6 +4386,408 @@ export type VersionWhereInput = {
   stage: Stage;
 };
 
+export type Voltage = Node & {
+  __typename?: 'Voltage';
+  /** The time the document was created */
+  createdAt: Scalars['DateTime'];
+  /** User that created this document */
+  createdBy?: Maybe<User>;
+  /** Get the document in other stages */
+  documentInStages: Array<Voltage>;
+  /** List of Voltage versions */
+  history: Array<Version>;
+  /** The unique identifier */
+  id: Scalars['ID'];
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<User>;
+  scheduledIn: Array<ScheduledOperation>;
+  /** System stage field */
+  stage: Stage;
+  /** The time the document was updated */
+  updatedAt: Scalars['DateTime'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<User>;
+  voltage: Scalars['String'];
+};
+
+
+export type VoltageCreatedByArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type VoltageDocumentInStagesArgs = {
+  includeCurrent?: Scalars['Boolean'];
+  inheritLocale?: Scalars['Boolean'];
+  stages?: Array<Stage>;
+};
+
+
+export type VoltageHistoryArgs = {
+  limit?: Scalars['Int'];
+  skip?: Scalars['Int'];
+  stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type VoltagePublishedByArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type VoltageScheduledInArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ScheduledOperationWhereInput>;
+};
+
+
+export type VoltageUpdatedByArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+export type VoltageConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: VoltageWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type VoltageConnection = {
+  __typename?: 'VoltageConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<VoltageEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type VoltageCreateInput = {
+  ckyqtvn201a9c01z4amgp3lyu?: InputMaybe<ProductCreateManyInlineInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  voltage: Scalars['String'];
+};
+
+export type VoltageCreateManyInlineInput = {
+  /** Connect multiple existing Voltage documents */
+  connect?: InputMaybe<Array<VoltageWhereUniqueInput>>;
+  /** Create and connect multiple existing Voltage documents */
+  create?: InputMaybe<Array<VoltageCreateInput>>;
+};
+
+export type VoltageCreateOneInlineInput = {
+  /** Connect one existing Voltage document */
+  connect?: InputMaybe<VoltageWhereUniqueInput>;
+  /** Create and connect one Voltage document */
+  create?: InputMaybe<VoltageCreateInput>;
+};
+
+/** An edge in a connection. */
+export type VoltageEdge = {
+  __typename?: 'VoltageEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node: Voltage;
+};
+
+/** Identifies documents */
+export type VoltageManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<VoltageWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<VoltageWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<VoltageWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  /** All values that are not equal to given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+  voltage?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  voltage_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  voltage_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  voltage_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values that are not equal to given value. */
+  voltage_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  voltage_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  voltage_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  voltage_not_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values not starting with the given string. */
+  voltage_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  voltage_starts_with?: InputMaybe<Scalars['String']>;
+};
+
+export enum VoltageOrderByInput {
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  PublishedAtAsc = 'publishedAt_ASC',
+  PublishedAtDesc = 'publishedAt_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC',
+  VoltageAsc = 'voltage_ASC',
+  VoltageDesc = 'voltage_DESC'
+}
+
+export type VoltageUpdateInput = {
+  ckyqtvn201a9c01z4amgp3lyu?: InputMaybe<ProductUpdateManyInlineInput>;
+  voltage?: InputMaybe<Scalars['String']>;
+};
+
+export type VoltageUpdateManyInlineInput = {
+  /** Connect multiple existing Voltage documents */
+  connect?: InputMaybe<Array<VoltageConnectInput>>;
+  /** Create and connect multiple Voltage documents */
+  create?: InputMaybe<Array<VoltageCreateInput>>;
+  /** Delete multiple Voltage documents */
+  delete?: InputMaybe<Array<VoltageWhereUniqueInput>>;
+  /** Disconnect multiple Voltage documents */
+  disconnect?: InputMaybe<Array<VoltageWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing Voltage documents */
+  set?: InputMaybe<Array<VoltageWhereUniqueInput>>;
+  /** Update multiple Voltage documents */
+  update?: InputMaybe<Array<VoltageUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple Voltage documents */
+  upsert?: InputMaybe<Array<VoltageUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type VoltageUpdateManyInput = {
+  voltage?: InputMaybe<Scalars['String']>;
+};
+
+export type VoltageUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: VoltageUpdateManyInput;
+  /** Document search */
+  where: VoltageWhereInput;
+};
+
+export type VoltageUpdateOneInlineInput = {
+  /** Connect existing Voltage document */
+  connect?: InputMaybe<VoltageWhereUniqueInput>;
+  /** Create and connect one Voltage document */
+  create?: InputMaybe<VoltageCreateInput>;
+  /** Delete currently connected Voltage document */
+  delete?: InputMaybe<Scalars['Boolean']>;
+  /** Disconnect currently connected Voltage document */
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  /** Update single Voltage document */
+  update?: InputMaybe<VoltageUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single Voltage document */
+  upsert?: InputMaybe<VoltageUpsertWithNestedWhereUniqueInput>;
+};
+
+export type VoltageUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: VoltageUpdateInput;
+  /** Unique document search */
+  where: VoltageWhereUniqueInput;
+};
+
+export type VoltageUpsertInput = {
+  /** Create document if it didn't exist */
+  create: VoltageCreateInput;
+  /** Update document if it exists */
+  update: VoltageUpdateInput;
+};
+
+export type VoltageUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: VoltageUpsertInput;
+  /** Unique document search */
+  where: VoltageWhereUniqueInput;
+};
+
+/** Identifies documents */
+export type VoltageWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<VoltageWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<VoltageWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<VoltageWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  /** All values that are not equal to given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+  voltage?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  voltage_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  voltage_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  voltage_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values that are not equal to given value. */
+  voltage_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  voltage_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  voltage_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  voltage_not_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values not starting with the given string. */
+  voltage_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  voltage_starts_with?: InputMaybe<Scalars['String']>;
+};
+
+/** References Voltage record uniquely */
+export type VoltageWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
 export enum _FilterKind {
   And = 'AND',
   Not = 'NOT',
@@ -4272,6 +4832,8 @@ export enum _MutationKind {
   DeleteMany = 'deleteMany',
   Publish = 'publish',
   PublishMany = 'publishMany',
+  SchedulePublish = 'schedulePublish',
+  ScheduleUnpublish = 'scheduleUnpublish',
   Unpublish = 'unpublish',
   UnpublishMany = 'unpublishMany',
   Update = 'update',
@@ -4307,30 +4869,32 @@ export enum _SystemDateTimeFieldVariation {
 
 export type HeaderCategoryFieldsFragment = { __typename?: 'Category', name: string, slug: string, description?: string | null | undefined };
 
-export type ProductPageItemsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ProductPageItemsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', name: string, slug?: string | null | undefined, categories: Array<{ __typename?: 'Category', name: string, slug: string }> }> };
-
 export type ProductPageItemQueryVariables = Exact<{
   product: Scalars['String'];
   category: Scalars['String'];
 }>;
 
 
-export type ProductPageItemQuery = { __typename?: 'Query', product?: { __typename?: 'Product', name: string, slug?: string | null | undefined } | null | undefined, category?: { __typename?: 'Category', name: string, slug: string } | null | undefined };
+export type ProductPageItemQuery = { __typename?: 'Query', product?: { __typename?: 'Product', id: string, name: string, slug?: string | null | undefined, voltages: Array<{ __typename?: 'Voltage', voltage: string }>, images: Array<{ __typename?: 'Asset', id: string, url: string, altText?: string | null | undefined, width?: number | null | undefined, height?: number | null | undefined }> } | null | undefined, category?: { __typename?: 'Category', name: string, slug: string } | null | undefined, categories: Array<{ __typename?: 'Category', name: string, slug: string, description?: string | null | undefined }> };
 
-export type CategoryPageItemsQueryVariables = Exact<{ [key: string]: never; }>;
+export type ProductPageItemsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CategoryPageItemsQuery = { __typename?: 'Query', categories: Array<{ __typename?: 'Category', name: string, slug: string }> };
+export type ProductPageItemsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, slug?: string | null | undefined, categories: Array<{ __typename?: 'Category', slug: string }> }> };
 
 export type CategoryPageItemQueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
 
 
-export type CategoryPageItemQuery = { __typename?: 'Query', category?: { __typename?: 'Category', name: string, slug: string, products: Array<{ __typename?: 'Product', name: string, slug?: string | null | undefined }> } | null | undefined, categories: Array<{ __typename?: 'Category', name: string, slug: string, description?: string | null | undefined }> };
+export type CategoryPageItemQuery = { __typename?: 'Query', category?: { __typename?: 'Category', name: string, slug: string, products: Array<{ __typename?: 'Product', name: string, slug?: string | null | undefined, images: Array<{ __typename?: 'Asset', id: string, url: string, altText?: string | null | undefined, width?: number | null | undefined, height?: number | null | undefined }> }> } | null | undefined, categories: Array<{ __typename?: 'Category', name: string, slug: string, description?: string | null | undefined }> };
+
+export type CategoryPageItemsQueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+export type CategoryPageItemsQuery = { __typename?: 'Query', categories: Array<{ __typename?: 'Category', name: string, slug: string, description?: string | null | undefined }> };
 
 export type HomeCategoryListQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -4344,37 +4908,40 @@ export const HeaderCategoryFieldsFragmentDoc = gql`
   description
 }
     `;
-export const ProductPageItemsDocument = gql`
-    query ProductPageItems {
-  products {
-    name
-    slug
-    categories {
-      ... on Category {
-        name
-        slug
-      }
-    }
-  }
-}
-    `;
 export const ProductPageItemDocument = gql`
     query ProductPageItem($product: String!, $category: String!) {
   product(where: {slug: $product}) {
+    id
     name
     slug
+    voltages {
+      voltage
+    }
+    images {
+      id
+      url
+      altText
+      width
+      height
+    }
   }
   category(where: {slug: $category}) {
     name
     slug
   }
-}
-    `;
-export const CategoryPageItemsDocument = gql`
-    query CategoryPageItems {
   categories {
-    name
+    ...HeaderCategoryFields
+  }
+}
+    ${HeaderCategoryFieldsFragmentDoc}`;
+export const ProductPageItemsDocument = gql`
+    query ProductPageItems {
+  products {
+    id
     slug
+    categories {
+      slug
+    }
   }
 }
     `;
@@ -4387,9 +4954,23 @@ export const CategoryPageItemDocument = gql`
       ... on Product {
         name
         slug
+        images(first: 1) {
+          id
+          url
+          altText
+          width
+          height
+        }
       }
     }
   }
+  categories {
+    ...HeaderCategoryFields
+  }
+}
+    ${HeaderCategoryFieldsFragmentDoc}`;
+export const CategoryPageItemsDocument = gql`
+    query CategoryPageItems($slug: String!) {
   categories {
     ...HeaderCategoryFields
   }
@@ -4417,17 +4998,17 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    ProductPageItems(variables?: ProductPageItemsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ProductPageItemsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<ProductPageItemsQuery>(ProductPageItemsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ProductPageItems');
-    },
     ProductPageItem(variables: ProductPageItemQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ProductPageItemQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ProductPageItemQuery>(ProductPageItemDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ProductPageItem');
     },
-    CategoryPageItems(variables?: CategoryPageItemsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CategoryPageItemsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CategoryPageItemsQuery>(CategoryPageItemsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CategoryPageItems');
+    ProductPageItems(variables?: ProductPageItemsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ProductPageItemsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ProductPageItemsQuery>(ProductPageItemsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ProductPageItems');
     },
     CategoryPageItem(variables: CategoryPageItemQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CategoryPageItemQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<CategoryPageItemQuery>(CategoryPageItemDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CategoryPageItem');
+    },
+    CategoryPageItems(variables: CategoryPageItemsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CategoryPageItemsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CategoryPageItemsQuery>(CategoryPageItemsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CategoryPageItems');
     },
     HomeCategoryList(variables?: HomeCategoryListQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<HomeCategoryListQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<HomeCategoryListQuery>(HomeCategoryListDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'HomeCategoryList');

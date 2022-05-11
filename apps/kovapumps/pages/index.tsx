@@ -6,7 +6,7 @@ import api from '../lib/api'
 
 export default function Home({ categories }) {
   return (
-    <Layout preview={false} categories={categories}>
+    <Layout categories={categories}>
       <div className="">
         <div className="max-w-2xl mx-auto px-4sm:px-6 lg:max-w-7xl lg:px-8">
           <h2 className="text-2xl font-extrabold tracking-tight text-neutral-50">Customers also purchased</h2>

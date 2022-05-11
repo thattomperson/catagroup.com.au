@@ -12,10 +12,15 @@ import crossSection from '../assets/cross-section.png'
 import api, { DistributorListQuery } from '../lib/api'
 import DistributorList from '../components/DistributorList';
 import Footer from '../components/Footer';
+import Head from 'next/head';
 
 export default function Home({ areas }: { areas: DistributorListQuery['areas'] }) {
   return (
     <>
+      <Head>
+        <title>Master Vent Holding Tank Odour Filters</title>
+      </Head>
+
       <header className="bg-gradient-to-b from-[#16488D] to-[#2858A8]">
         <div className='max-w-3xl mx-auto px-10 lg:px-32 py-10'>
           <Image src={logo} width={688} height={logo.height / (logo.width / 688)} alt="Master Vent" layout='responsive' />

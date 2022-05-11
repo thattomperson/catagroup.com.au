@@ -1,5 +1,3 @@
-import '../styles/globals.css'
-
 import { useFathom } from 'fathom';
 
 function App({ Component, pageProps }) {
