@@ -121,24 +121,23 @@ export default function ProductPageItem({ product, category, categories }: Produ
                 </section>
               </div>
 
-              <div className="mt-8 lg:col-span-5">
+              <div className="lg:col-span-5">
 
                 {/* Product details */}
-                {/* product.description ? (
+                {product.description ? (
                   <div className="mt-10">
                     <h2 className="text-sm font-medium text-gray-100">Description</h2>
 
-                    <div
-                      className="mt-4 prose prose-sm text-gray-400"
-                      dangerouslySetInnerHTML={{ __html: product.description }}
-                    />
+                    <div className="mt-4 prose prose-sm text-gray-300">
+                      {product.description}
                   </div>
-                ) : null} */}
+                  </div>
+                ) : null}
 
                 {/* Voltage picker */}
                 <div className="mt-8">
                   <div className="flex items-center justify-between">
-                    <h2 className="text-sm font-medium text-gray-300">Voltage</h2>
+                    <h2 className="text-sm font-medium text-gray-100">Voltage</h2>
                   </div>
 
                   <RadioGroup value={selectedVoltage} onChange={setSelectedVoltage} className="mt-2">
@@ -169,21 +168,35 @@ export default function ProductPageItem({ product, category, categories }: Produ
 
                 {/* Pump performance cures  */}
                 {selectedVoltage ? (
-                  <div className="mt-8">
-                    <h2 className="text-sm  font-medium text-gray-100">Pump Curves - {selectedVoltage.voltage}</h2>
-                    <Image
-                      src={selectedVoltage.curve.url}
-                      alt={selectedVoltage.curve.altText}
-                      width="600px"
-                      height="337px"
-                      layout='responsive'
-                      objectFit='cover'
-                      objectPosition='top'
-                    />
-                  </div>
+                  <>
+                    <div className="mt-8">
+                      <h2 className="text-sm  font-medium text-gray-100">Pump Curves - {selectedVoltage.voltage}</h2>
+                      <Image
+                        src={selectedVoltage.curve.url}
+                        alt={selectedVoltage.curve.altText}
+                        width="600px"
+                        height="337px"
+                        layout='responsive'
+                        objectFit='cover'
+                        objectPosition='top'
+                      />
+                    </div>
+
+                    <div className="border-t border-gray-200 mt-10 pt-10">
+                      <h2 className="text-sm  font-medium text-gray-100">Pump Power - {selectedVoltage.voltage}</h2>
+                      <div className="mt-4 prose prose-sm text-gray-300">
+                        <ul role="list">
+                          <li><strong>Watts:</strong> {selectedVoltage.watts}</li>
+                          <li><strong>Amps:</strong> {selectedVoltage.amps}</li>
+                          <li><strong>Hertz:</strong> {selectedVoltage.hertz}</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </>
                 ) : null}
 
                 {/* Product details */}
+
 
               </div>
             </div>
@@ -204,6 +217,7 @@ query ProductPageItem($product: String!, $category: String!) {
     id
     name
     slug
+    description
     voltages {
       id
       voltage

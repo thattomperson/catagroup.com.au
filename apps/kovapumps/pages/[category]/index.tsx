@@ -7,9 +7,7 @@ import { CategoryPageItemQuery } from '../../lib/api/generated/graphql';
 export default function CategoryPageItem({ categories, category }: CategoryPageItemQuery) {
   return (
     <Layout categories={categories}>
-      <div>
-        <Products category={category} products={category.products} />
-      </div>
+      <Products category={category} products={category.products} />
     </Layout>
   );
 }
@@ -19,10 +17,12 @@ query CategoryPageItem($slug: String!) {
   category(where: {slug: $slug}) {
     name
     slug
+    description
     products {
       ... on Product {
         name
         slug
+        description
         images(first: 1) {
           id
           url
