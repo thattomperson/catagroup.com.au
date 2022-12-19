@@ -23,7 +23,6 @@ export const get: RequestHandler<Locals> = async (request) => {
         internationally patented, innovative
         product with technology that is best
         described as “knock and listen”.`,
-        link: 'https://www.gobiuspro.com/',
       },
       {
         name: 'Kova Pump',
