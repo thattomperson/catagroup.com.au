@@ -49,7 +49,7 @@ export const get: RequestHandler<Locals> = async (request) => {
         compatible for all marine applications. Available in both BISO and SISO versions,
         these are suitable for commercial and military vessels operating under survey,
         super yachts and recreational motor and sailing yachts.`,
-        link: 'https://arcticsteel.com.au/',
+        // link: 'https://arcticsteel.com.au/',
       },
     ],
   };
