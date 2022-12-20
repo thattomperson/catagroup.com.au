@@ -7,6 +7,9 @@
   "dependencies": {
     "fathom-client": "^1.0.0"
   },
+  "peerDependencies": {
+    "react": "*"
+  },
   "devDependencies": {
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",

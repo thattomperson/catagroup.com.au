@@ -11,7 +11,10 @@
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "env:pull": "turbo run env:pull --parallel"
+    "env:pull": "turbo run env:pull --parallel",
+    "catagroup": "npm run dev -- --filter=catagroup",
+    "kovapumps": "npm run dev -- --filter=kovapumps",
+    "mastervent": "npm run dev -- --filter=mastervent"
   },
   "devDependencies": {
     "prettier": "^2.5.1",
