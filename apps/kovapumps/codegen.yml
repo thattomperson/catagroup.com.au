@@ -1,5 +1,5 @@
 overwrite: true
-schema: ${GRAPHCMS_PROJECT_API}
+schema: ${HYGRAPH_PROJECT_API}
 documents: ["lib/api/*.graphql", "pages/**", "components/**"]
 generates:
   lib/api/generated/graphql.ts:
