@@ -134,9 +134,7 @@ export default function Home({ areas }: { areas: DistributorListQuery['areas'] }
           </div>
         </div>
       </div>
-      <div className='container max-w-2xl lg:max-w-7xl mx-auto'>
-        <DistributorList areas={areas} />
-      </div>
+
 
       <Footer />
     </>
