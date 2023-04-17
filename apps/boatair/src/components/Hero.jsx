@@ -23,7 +23,7 @@ export function Hero() {
           <span className="sr-only">boatair</span>
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-3xl tracking-tight text-white">
-          Quality Marine Air Conditioning
+          Marine Air Conditioning
         </p>
       </Container>
     </section>
